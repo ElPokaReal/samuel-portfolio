@@ -5,12 +5,14 @@ const About = () => {
   const { t } = useLanguage();
   
   const technologies = [
-    'JavaScript (ES6+)',
+    'JavaScript',
     'React',
     'Node.js',
     'TypeScript',
     'Next.js',
     'Tailwind CSS',
+    'Supabase',
+    'NextJS'
   ];
 
   return (

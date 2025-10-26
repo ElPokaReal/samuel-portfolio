@@ -13,9 +13,22 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   const [language, setLanguageState] = useState<Language>(() => {
-    // Obtener idioma guardado en localStorage o usar español por defecto
+    // Primero verificar si hay un idioma guardado en localStorage
     const savedLanguage = localStorage.getItem('language') as Language;
-    return savedLanguage || 'es';
+    if (savedLanguage) {
+      return savedLanguage;
+    }
+    
+    // Si no hay idioma guardado, detectar el idioma del navegador
+    const browserLanguage = navigator.language.toLowerCase();
+    if (browserLanguage.startsWith('es')) {
+      return 'es';
+    } else if (browserLanguage.startsWith('en')) {
+      return 'en';
+    }
+    
+    // Por defecto usar español
+    return 'es';
   });
 
   const setLanguage = (lang: Language) => {
@@ -26,6 +39,15 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     // Actualizar el atributo lang del HTML
     document.documentElement.lang = language;
+    
+    // Actualizar el título de la página
+    document.title = translations[language].meta.title;
+    
+    // Actualizar la meta description
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', translations[language].meta.description);
+    }
   }, [language]);
 
   const value = {

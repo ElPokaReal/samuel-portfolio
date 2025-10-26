@@ -7,6 +7,7 @@ import { cn } from '../lib/utils';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
   const { language, setLanguage, t } = useLanguage();
 
   const toggleLanguage = () => {
@@ -16,11 +17,43 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      // Detectar sección activa
+      const sections = ['about', 'projects', 'contact'];
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetBottom = offsetTop + element.offsetHeight;
+
+          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+
+      // Si está en el top, no hay sección activa
+      if (window.scrollY < 100) {
+        setActiveSection('');
+      }
     };
 
+    handleScroll(); // Llamar una vez al montar
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setIsMenuOpen(false);
+    }
+  };
 
   return (
     <header>
@@ -77,24 +110,42 @@ const Header = () => {
               <ul className="flex gap-8 text-sm">
                 <li>
                   <a
-                    className="text-slate-gray hover:text-accent block duration-150"
+                    className={cn(
+                      "block duration-150",
+                      activeSection === 'about' 
+                        ? 'text-accent' 
+                        : 'text-slate-gray hover:text-accent'
+                    )}
                     href="#about"
+                    onClick={(e) => handleNavClick(e, 'about')}
                   >
                     {t.header.about}
                   </a>
                 </li>
                 <li>
                   <a
-                    className="text-slate-gray hover:text-accent block duration-150"
+                    className={cn(
+                      "block duration-150",
+                      activeSection === 'projects' 
+                        ? 'text-accent' 
+                        : 'text-slate-gray hover:text-accent'
+                    )}
                     href="#projects"
+                    onClick={(e) => handleNavClick(e, 'projects')}
                   >
                     {t.header.projects}
                   </a>
                 </li>
                 <li>
                   <a
-                    className="text-slate-gray hover:text-accent block duration-150"
+                    className={cn(
+                      "block duration-150",
+                      activeSection === 'contact' 
+                        ? 'text-accent' 
+                        : 'text-slate-gray hover:text-accent'
+                    )}
                     href="#contact"
+                    onClick={(e) => handleNavClick(e, 'contact')}
                   >
                     {t.header.contact}
                   </a>
@@ -108,27 +159,42 @@ const Header = () => {
                 <ul className="space-y-6 text-base">
                   <li>
                     <a
-                      className="text-slate-gray hover:text-accent block duration-150"
+                      className={cn(
+                        "block duration-150",
+                        activeSection === 'about' 
+                          ? 'text-accent' 
+                          : 'text-slate-gray hover:text-accent'
+                      )}
                       href="#about"
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={(e) => handleNavClick(e, 'about')}
                     >
                       {t.header.about}
                     </a>
                   </li>
                   <li>
                     <a
-                      className="text-slate-gray hover:text-accent block duration-150"
+                      className={cn(
+                        "block duration-150",
+                        activeSection === 'projects' 
+                          ? 'text-accent' 
+                          : 'text-slate-gray hover:text-accent'
+                      )}
                       href="#projects"
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={(e) => handleNavClick(e, 'projects')}
                     >
                       {t.header.projects}
                     </a>
                   </li>
                   <li>
                     <a
-                      className="text-slate-gray hover:text-accent block duration-150"
+                      className={cn(
+                        "block duration-150",
+                        activeSection === 'contact' 
+                          ? 'text-accent' 
+                          : 'text-slate-gray hover:text-accent'
+                      )}
                       href="#contact"
-                      onClick={() => setIsMenuOpen(false)}
+                      onClick={(e) => handleNavClick(e, 'contact')}
                     >
                       {t.header.contact}
                     </a>
@@ -138,7 +204,7 @@ const Header = () => {
               <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
           <a
             className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-transparent border border-accent text-accent hover:bg-accent/10 text-sm font-bold leading-normal tracking-[0.015em] transition-colors"
-            href="#"
+            href={t.header.cvUrl}
             target="_blank"
             rel="noopener noreferrer"
           >

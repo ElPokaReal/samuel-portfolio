@@ -10,11 +10,16 @@ export interface ProjectData {
 }
 
 export interface Translations {
+  meta: {
+    title: string;
+    description: string;
+  };
   header: {
     about: string;
     projects: string;
     contact: string;
     cv: string;
+    cvUrl: string;
   };
   hero: {
     greeting: string;
@@ -49,11 +54,16 @@ export interface Translations {
 
 export const translations: Record<Language, Translations> = {
   es: {
+    meta: {
+      title: 'Portfolio de Samuel | Desarrollador Web',
+      description: 'Portfolio de Samuel Aranguren - Desarrollador Web especializado en NextJS y tecnologías modernas',
+    },
     header: {
       about: 'Acerca de mí',
       projects: 'Proyectos',
       contact: 'Contacto',
       cv: 'CV',
+      cvUrl: '/samuel-aranguren-cv.pdf',
     },
     hero: {
       greeting: 'Hola, mi nombre es',
@@ -127,11 +137,16 @@ export const translations: Record<Language, Translations> = {
     },
   },
   en: {
+    meta: {
+      title: "Samuel's Portfolio | Web Developer",
+      description: 'Samuel Aranguren Portfolio - Web Developer specialized in NextJS and modern technologies',
+    },
     header: {
       about: 'About',
       projects: 'Projects',
       contact: 'Contact',
       cv: 'Resume',
+      cvUrl: '/samuel-aranguren-cv.pdf',
     },
     hero: {
       greeting: 'Hi, my name is',
