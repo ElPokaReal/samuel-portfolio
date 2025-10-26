@@ -1,9 +1,13 @@
 import { Github, ExternalLink } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { projectData } from '../data/projectLinks';
 
 const Projects = () => {
   const { t } = useLanguage();
-  const projects = t.projects.items;
+  const projects = t.projects.items.map((project, index) => ({
+    ...project,
+    ...projectData[index],
+  }));
 
   return (
     <section className="py-20 md:py-24" id="projects">

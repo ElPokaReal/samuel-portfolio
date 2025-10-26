@@ -1,4 +1,5 @@
 import { useLanguage } from '../contexts/LanguageContext';
+import { TypewriterEffect } from './TypewriterEffect';
 
 const Hero = () => {
   const { t } = useLanguage();
@@ -13,8 +14,8 @@ const Hero = () => {
           <h2 className="text-text-light dark:text-text-dark text-4xl sm:text-5xl md:text-6xl font-black leading-tight tracking-tighter font-[family-name:var(--font-family-display)]">
             {t.hero.name}
           </h2>
-          <h3 className="text-slate-gray text-4xl sm:text-5xl md:text-6xl font-black leading-tight tracking-tighter font-[family-name:var(--font-family-display)]">
-            {t.hero.tagline}
+          <h3 className="text-text-light dark:text-text-dark text-4xl md:text-6xl font-bold leading-tight tracking-[-0.015em] font-[family-name:var(--font-family-display)]">
+            <TypewriterEffect phrases={t.hero.typewriterPhrases} />
           </h3>
           <p className="text-slate-gray text-base font-normal leading-relaxed max-w-xl mt-4">
             {t.hero.description}

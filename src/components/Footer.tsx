@@ -1,5 +1,6 @@
 import { Github, Linkedin, Mail } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { motion } from 'framer-motion';
 
 const Footer = () => {
   const { t } = useLanguage();
@@ -33,11 +34,39 @@ const Footer = () => {
             <Mail size={24} />
           </a>
         </div>
-        <p className="text-slate-gray text-xs font-body">
-          {t.footer.designed}
-        </p>
-        <p className="text-slate-gray text-xs font-body">
-          {t.footer.inspired}
+        <p className="text-slate-gray text-sm font-body flex items-center justify-center gap-2 flex-wrap">
+          <span>
+            {t.footer.builtBy.split('Samuel Aranguren')[0]}
+            <span className="text-accent font-semibold">Samuel Aranguren</span>
+            {t.footer.builtBy.split('Samuel Aranguren')[1]}
+          </span>
+          <motion.span
+            animate={{
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 1,
+              repeat: Infinity,
+              repeatDelay: 2,
+            }}
+            className="inline-block"
+          >
+            {t.footer.heart}
+          </motion.span>
+          <span>{t.footer.and}</span>
+          <motion.span
+            animate={{
+              rotate: [0, -10, 10, -10, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              repeatDelay: 3,
+            }}
+            className="inline-block"
+          >
+            {t.footer.coffee}
+          </motion.span>
         </p>
       </footer>
 

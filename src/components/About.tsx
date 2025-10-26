@@ -26,15 +26,7 @@ const About = () => {
           <div className="text-slate-gray text-base font-normal leading-relaxed space-y-4">
             <p>{t.about.paragraph1}</p>
             <p>{t.about.paragraph2}</p>
-            <p>{t.about.techTitle}</p>
-            <ul className="grid grid-cols-2 gap-2 text-sm">
-              {technologies.map((tech, index) => (
-                <li key={index} className="flex items-center gap-2">
-                  <ChevronRight className="text-accent" size={16} />
-                  {tech}
-                </li>
-              ))}
-            </ul>
+            <img src="https://skillicons.dev/icons?i=react,js,ts,nodejs,php,flutter,express,nextjs,supabase,postgresql,mysql,sqlite,html,css,git,laravel,tailwind&theme=light&perline=6" alt="Tech Stack" />
           </div>
         </div>
         <div className="w-full md:w-1/2 flex justify-center mt-8 md:mt-0">
@@ -44,7 +36,7 @@ const About = () => {
               <img
                 className="w-full h-full object-cover filter grayscale hover:filter-none transition-all duration-300"
                 alt="Foto profesional"
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop"
+                src="https://img.freepik.com/vector-gratis/ilustracion-icono-galeria_53876-27002.jpg?semt=ais_hybrid&w=740&q=80"
               />
             </div>
           </div>

@@ -1,12 +1,8 @@
 export type Language = 'es' | 'en';
 
-export interface ProjectData {
+export interface ProjectTranslation {
   title: string;
   description: string;
-  technologies: string[];
-  image: string;
-  github?: string;
-  live?: string;
 }
 
 export interface Translations {
@@ -25,6 +21,7 @@ export interface Translations {
     greeting: string;
     name: string;
     tagline: string;
+    typewriterPhrases: string[];
     description: string;
     cta: string;
   };
@@ -32,13 +29,12 @@ export interface Translations {
     title: string;
     paragraph1: string;
     paragraph2: string;
-    techTitle: string;
   };
   projects: {
     title: string;
     featured: string;
     viewMore: string;
-    items: ProjectData[];
+    items: ProjectTranslation[];
   };
   contact: {
     subtitle: string;
@@ -47,8 +43,10 @@ export interface Translations {
     cta: string;
   };
   footer: {
-    designed: string;
-    inspired: string;
+    builtBy: string;
+    heart: string;
+    and: string;
+    coffee: string;
   };
 }
 
@@ -67,8 +65,14 @@ export const translations: Record<Language, Translations> = {
     },
     hero: {
       greeting: 'Hola, mi nombre es',
-      name: 'Samuel Developer.',
+      name: 'Samuel Aranguren.',
       tagline: 'Creo cosas para la web.',
+      typewriterPhrases: [
+        'Creo cosas para la web.',
+        'Desarrollo aplicaciones modernas.',
+        'Construyo experiencias digitales.',
+        'Transformo ideas en código.',
+      ],
       description:
         'Soy un desarrollador de software apasionado por la creación de soluciones digitales, con un enfoque en construir aplicaciones web hermosas y funcionales.',
       cta: 'Ponte en contacto',
@@ -79,7 +83,6 @@ export const translations: Record<Language, Translations> = {
         'Soy un desarrollador web apasionado con experiencia en la creación de aplicaciones interactivas y eficientes, especializado en NextJS y tecnologías relacionadas.',
       paragraph2:
         'Además de mi trabajo en desarrollo web, soy un gran amante de los videojuegos y estoy profundamente interesado en aprender cómo automatizar procesos.',
-      techTitle: 'Aquí hay algunas tecnologías con las que he estado trabajando recientemente:',
     },
     projects: {
       title: 'Proyectos Destacados',
@@ -90,37 +93,21 @@ export const translations: Record<Language, Translations> = {
           title: 'Sistema de Gestión de Préstamos AgroTrujillo',
           description:
             'Como trabajador en AgroTrujillo, noté un problema al gestionar a los productores al otorgarles préstamos, así que decidí desarrollar un sistema que permite administrar los préstamos otorgados a los productores en el área de Gestión Productiva.',
-          technologies: ['Next.js', 'PostgreSQL', 'Prisma', 'TypeScript'],
-          image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&h=400&fit=crop',
-          github: '#',
-          live: '#',
         },
         {
           title: 'LimpiVen - App de Servicios de Limpieza',
           description:
             'LimpiVen es una aplicación móvil diseñada para conectar usuarios con servicios de limpieza en Venezuela. La app simplifica el proceso de encontrar, reservar y gestionar profesionales de limpieza para hogares y negocios.',
-          technologies: ['React Native', 'Firebase', 'Node.js'],
-          image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=400&fit=crop',
-          github: '#',
-          live: '#',
         },
         {
           title: 'Sistema de Inventario para CDCE',
           description:
             'He desarrollado un sistema de gestión de inventario que ayuda a los usuarios a rastrear, organizar y controlar el stock en diferentes zonas o áreas. Proporciona una interfaz simple para gestionar artículos, cantidades y ubicaciones de manera eficiente.',
-          technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
-          image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop',
-          github: '#',
-          live: '#',
         },
         {
           title: 'Sitio Web Tu Conexión Infinita',
           description:
             'Este es el sitio web oficial de la empresa que incluye toda la información relevante sobre el servicio de internet y telecomunicaciones.',
-          technologies: ['Next.js', 'Tailwind CSS', 'Vercel'],
-          image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop',
-          github: '#',
-          live: '#',
         },
       ],
     },
@@ -132,8 +119,10 @@ export const translations: Record<Language, Translations> = {
       cta: '¡Hola!',
     },
     footer: {
-      designed: 'Diseñado y construido por Samuel Developer.',
-      inspired: 'Inspirado en el diseño de Brittany Chiang.',
+      builtBy: 'Desarrollado por Samuel Aranguren con',
+      heart: '❤️',
+      and: 'y algo de',
+      coffee: '☕',
     },
   },
   en: {
@@ -150,8 +139,14 @@ export const translations: Record<Language, Translations> = {
     },
     hero: {
       greeting: 'Hi, my name is',
-      name: 'Samuel Developer.',
+      name: 'Samuel Aranguren.',
       tagline: 'I build things for the web.',
+      typewriterPhrases: [
+        'I build things for the web.',
+        'I develop modern applications.',
+        'I create digital experiences.',
+        'I transform ideas into code.',
+      ],
       description:
         "I'm a software developer passionate about creating digital solutions, with a focus on building beautiful and functional web applications.",
       cta: 'Get In Touch',
@@ -162,7 +157,6 @@ export const translations: Record<Language, Translations> = {
         'I am a passionate web developer with experience in creating interactive and efficient applications, specializing in NextJS and related technologies.',
       paragraph2:
         'In addition to my work in web development, I am a huge videogames lover and am deeply invested in learning how to automate processes.',
-      techTitle: "Here are a few technologies I've been working with recently:",
     },
     projects: {
       title: 'Featured Projects',
@@ -175,8 +169,6 @@ export const translations: Record<Language, Translations> = {
             'As a worker at AgroTrujillo, I noticed a problem when managing producers when granting them loans, so I decided to develop a system that allows managing loans granted to producers in the area of Productive Management.',
           technologies: ['Next.js', 'PostgreSQL', 'Prisma', 'TypeScript'],
           image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&h=400&fit=crop',
-          github: '#',
-          live: '#',
         },
         {
           title: 'LimpiVen - Cleaning Services App',
@@ -184,8 +176,6 @@ export const translations: Record<Language, Translations> = {
             'LimpiVen is a mobile application designed to connect users with cleaning services in Venezuela. The app streamlines the process of finding, booking, and managing cleaning professionals for homes and businesses.',
           technologies: ['React Native', 'Firebase', 'Node.js'],
           image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=400&fit=crop',
-          github: '#',
-          live: '#',
         },
         {
           title: 'Inventory System for CDCE',
@@ -193,8 +183,6 @@ export const translations: Record<Language, Translations> = {
             "I've made an inventory management system that helps users track, organize, and control stock across different zones or areas. It provides a simple interface for managing items, quantities, and locations efficiently.",
           technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
           image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop',
-          github: '#',
-          live: '#',
         },
         {
           title: 'Tu Conexión Infinita Website',
@@ -202,8 +190,6 @@ export const translations: Record<Language, Translations> = {
             'This is the official website of the company that includes all relevant information about the service.',
           technologies: ['Next.js', 'Tailwind CSS', 'Vercel'],
           image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop',
-          github: '#',
-          live: '#',
         },
       ],
     },
@@ -215,8 +201,10 @@ export const translations: Record<Language, Translations> = {
       cta: 'Say Hello',
     },
     footer: {
-      designed: 'Designed & Built by Samuel Developer.',
-      inspired: "Inspired by Brittany Chiang's design.",
+      builtBy: 'Built by Samuel Aranguren with',
+      heart: '❤️',
+      and: 'and some',
+      coffee: '☕',
     },
   },
 };
