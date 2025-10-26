@@ -1,19 +1,7 @@
-import { ChevronRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
 const About = () => {
   const { t } = useLanguage();
-  
-  const technologies = [
-    'JavaScript',
-    'React',
-    'Node.js',
-    'TypeScript',
-    'Next.js',
-    'Tailwind CSS',
-    'Supabase',
-    'NextJS'
-  ];
 
   return (
     <section className="py-20 md:py-24" id="about">

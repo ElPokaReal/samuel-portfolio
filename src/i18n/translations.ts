@@ -5,6 +5,14 @@ export interface ProjectTranslation {
   description: string;
 }
 
+export interface ExperienceItem {
+  company: string;
+  location: string;
+  position: string;
+  period: string;
+  description: string;
+}
+
 export interface Translations {
   meta: {
     title: string;
@@ -30,6 +38,10 @@ export interface Translations {
     paragraph1: string;
     paragraph2: string;
   };
+  experience: {
+    title: string;
+    items: ExperienceItem[];
+  };
   projects: {
     title: string;
     featured: string;
@@ -53,8 +65,8 @@ export interface Translations {
 export const translations: Record<Language, Translations> = {
   es: {
     meta: {
-      title: 'Portfolio de Samuel | Desarrollador Web',
-      description: 'Portfolio de Samuel Aranguren - Desarrollador Web especializado en NextJS y tecnologías modernas',
+      title: 'Portafolio de Samuel | Desarrollador Web',
+      description: 'Portafolio de Samuel Aranguren - Desarrollador Web especializado en NextJS y tecnologías modernas',
     },
     header: {
       about: 'Acerca de mí',
@@ -84,15 +96,36 @@ export const translations: Record<Language, Translations> = {
       paragraph2:
         'Además de mi trabajo en desarrollo web, soy un gran amante de los videojuegos y estoy profundamente interesado en aprender cómo automatizar procesos.',
     },
+    experience: {
+      title: 'Experiencia Laboral',
+      items: [
+        {
+          company: 'Tu Conexión Infinita',
+          location: 'Trujillo, VE',
+          position: 'Coordinador de Sistemas',
+          period: 'Ene 2025 — Presente',
+          description:
+            'Liderando el desarrollo del sitio web oficial de "Tu Conexión Infinita", implementando un portal de pagos robusto y utilizando WispHub como herramienta de gestión.',
+        },
+        {
+          company: 'AgroTrujillo S.A',
+          location: 'Trujillo, VE',
+          position: 'Soporte Técnico',
+          period: 'Ago 2021 — Ene 2025',
+          description:
+            'Desarrollé un sistema para la gestión de préstamos a productores con el fin de automatizar estos procesos en el área de Gestión Productiva.',
+        },
+      ],
+    },
     projects: {
       title: 'Proyectos Destacados',
       featured: 'Proyecto Destacado',
       viewMore: 'Ver más proyectos',
       items: [
         {
-          title: 'Sistema de Gestión de Préstamos AgroTrujillo',
+          title: 'Sitio Web Tu Conexión Infinita',
           description:
-            'Como trabajador en AgroTrujillo, noté un problema al gestionar a los productores al otorgarles préstamos, así que decidí desarrollar un sistema que permite administrar los préstamos otorgados a los productores en el área de Gestión Productiva.',
+            'Este es el sitio web oficial de la empresa que incluye toda la información relevante sobre el servicio de internet y telecomunicaciones.',
         },
         {
           title: 'LimpiVen - App de Servicios de Limpieza',
@@ -105,14 +138,14 @@ export const translations: Record<Language, Translations> = {
             'He desarrollado un sistema de gestión de inventario que ayuda a los usuarios a rastrear, organizar y controlar el stock en diferentes zonas o áreas. Proporciona una interfaz simple para gestionar artículos, cantidades y ubicaciones de manera eficiente.',
         },
         {
-          title: 'Sitio Web Tu Conexión Infinita',
+          title: 'Sistema de Gestión de Préstamos AgroTrujillo',
           description:
-            'Este es el sitio web oficial de la empresa que incluye toda la información relevante sobre el servicio de internet y telecomunicaciones.',
+            'Como trabajador en AgroTrujillo, noté un problema al gestionar a los productores al otorgarles préstamos, así que decidí desarrollar un sistema que permite administrar los préstamos otorgados a los productores en el área de Gestión Productiva.',
         },
       ],
     },
     contact: {
-      subtitle: '03. ¿Cuál es el siguiente paso?',
+      subtitle: '04. ¿Cuál es el siguiente paso?',
       title: 'Ponte en Contacto',
       description:
         'Actualmente estoy buscando nuevas oportunidades, mi bandeja de entrada está siempre abierta. Ya sea que tengas una pregunta o simplemente quieras saludar, ¡haré todo lo posible por responderte!',
@@ -158,43 +191,56 @@ export const translations: Record<Language, Translations> = {
       paragraph2:
         'In addition to my work in web development, I am a huge videogames lover and am deeply invested in learning how to automate processes.',
     },
+    experience: {
+      title: 'Work Experience',
+      items: [
+        {
+          company: 'Tu Conexión Infinita',
+          location: 'Trujillo, VE',
+          position: 'Systems Coordinator',
+          period: 'Jan 2025 — Present',
+          description:
+            'Leading the development of the official website for "Tu Conexión Infinita", implementing a robust payment portal and utilizing WispHub as a management tool.',
+        },
+        {
+          company: 'AgroTrujillo S.A',
+          location: 'Trujillo, VE',
+          position: 'Tech Support',
+          period: 'Aug 2021 — Jan 2025',
+          description:
+            'I developed a system for managing loans to producers in order to automate these processes in the area of Productive Management.',
+        },
+      ],
+    },
     projects: {
       title: 'Featured Projects',
       featured: 'Featured Project',
       viewMore: 'View More Projects',
       items: [
         {
-          title: 'AgroTrujillo Loans Management System',
+          title: 'Tu Conexión Infinita Website',
           description:
-            'As a worker at AgroTrujillo, I noticed a problem when managing producers when granting them loans, so I decided to develop a system that allows managing loans granted to producers in the area of Productive Management.',
-          technologies: ['Next.js', 'PostgreSQL', 'Prisma', 'TypeScript'],
-          image: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&h=400&fit=crop',
+            'This is the official website of the company that includes all relevant information about the service.',
         },
         {
           title: 'LimpiVen - Cleaning Services App',
           description:
             'LimpiVen is a mobile application designed to connect users with cleaning services in Venezuela. The app streamlines the process of finding, booking, and managing cleaning professionals for homes and businesses.',
-          technologies: ['React Native', 'Firebase', 'Node.js'],
-          image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&h=400&fit=crop',
         },
         {
           title: 'Inventory System for CDCE',
           description:
             "I've made an inventory management system that helps users track, organize, and control stock across different zones or areas. It provides a simple interface for managing items, quantities, and locations efficiently.",
-          technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
-          image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&h=400&fit=crop',
         },
         {
-          title: 'Tu Conexión Infinita Website',
+          title: 'AgroTrujillo Loans Management System',
           description:
-            'This is the official website of the company that includes all relevant information about the service.',
-          technologies: ['Next.js', 'Tailwind CSS', 'Vercel'],
-          image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop',
+            'As a worker at AgroTrujillo, I noticed a problem when managing producers when granting them loans, so I decided to develop a system that allows managing loans granted to producers in the area of Productive Management.',
         },
       ],
     },
     contact: {
-      subtitle: "03. What's Next?",
+      subtitle: "04. What's Next?",
       title: 'Get In Touch',
       description:
         "I'm currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I'll do my best to get back to you!",

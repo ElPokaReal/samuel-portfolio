@@ -12,7 +12,7 @@ const Projects = () => {
   return (
     <section className="py-20 md:py-24" id="projects">
       <h2 className="flex items-center gap-4 text-2xl font-bold leading-tight tracking-[-0.015em] font-[family-name:var(--font-family-display)] text-text-light dark:text-text-dark mb-10 px-4">
-        <span className="text-primary">02.</span>{t.projects.title}
+        <span className="text-primary">03.</span>{t.projects.title}
         <span className="flex-grow h-px bg-slate-gray/30"></span>
       </h2>
       <div className="space-y-16">
@@ -92,10 +92,20 @@ const Projects = () => {
       </div>
       <div className="text-center mt-16">
         <a
-          className="inline-block min-w-[84px] max-w-[240px] cursor-pointer overflow-hidden rounded-lg h-12 px-8 bg-transparent border border-accent text-accent hover:bg-accent/10 text-base font-bold leading-loose tracking-[0.015em] transition-colors"
+          className="group relative inline-flex items-center justify-center overflow-hidden rounded-lg px-8 py-3 font-bold text-accent transition-all duration-300 hover:text-white"
           href="#"
         >
-          <span className="truncate">{t.projects.viewMore}</span>
+          <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+          <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent"></span>
+          <span className="absolute top-0 left-0 w-0.5 h-full bg-accent"></span>
+          <span className="absolute top-0 right-0 w-0.5 h-full bg-accent"></span>
+          <span className="absolute bottom-0 right-0 w-full h-0.5 bg-accent"></span>
+          <span className="relative z-10 flex items-center gap-2">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            {t.projects.viewMore}
+          </span>
         </a>
       </div>
     </section>

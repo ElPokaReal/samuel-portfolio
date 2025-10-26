@@ -210,12 +210,22 @@ const Header = () => {
               </div>
               <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
           <a
-            className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-transparent border border-accent text-accent hover:bg-accent/10 text-sm font-bold leading-normal tracking-[0.015em] transition-colors"
+            className="group relative inline-flex items-center justify-center overflow-hidden rounded-lg px-4 h-10 font-bold text-accent transition-all duration-300 hover:text-white text-sm"
             href={t.header.cvUrl}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className="truncate">{t.header.cv}</span>
+            <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent"></span>
+            <span className="absolute top-0 left-0 w-0.5 h-full bg-accent"></span>
+            <span className="absolute top-0 right-0 w-0.5 h-full bg-accent"></span>
+            <span className="absolute bottom-0 right-0 w-full h-0.5 bg-accent"></span>
+            <span className="relative z-10 flex items-center gap-2">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              {t.header.cv}
+            </span>
           </a>
           <a
             className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-transparent text-slate-gray hover:text-accent gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors"
