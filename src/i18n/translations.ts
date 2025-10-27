@@ -47,6 +47,12 @@ export interface Translations {
     featured: string;
     viewMore: string;
     items: ProjectTranslation[];
+    otherProjectsTitle: string;
+    otherProjectsSubtitle: string;
+    otherItems: ProjectTranslation[];
+    showMore: string;
+    showLess: string;
+    hideProjects: string;
   };
   contact: {
     subtitle: string;
@@ -128,9 +134,9 @@ export const translations: Record<Language, Translations> = {
             'Este es el sitio web oficial de la empresa que incluye toda la información relevante sobre el servicio de internet y telecomunicaciones.',
         },
         {
-          title: 'LimpiVen - App de Servicios de Limpieza',
+          title: 'Efemérides Venezolanas',
           description:
-            'LimpiVen es una aplicación móvil diseñada para conectar usuarios con servicios de limpieza en Venezuela. La app simplifica el proceso de encontrar, reservar y gestionar profesionales de limpieza para hogares y negocios.',
+            'Aplicación web moderna que genera y muestra diariamente efemérides históricas de Venezuela. Desarrollada con Next.js y Gemini AI, presenta una hermosa interfaz de estilo colonial con efectos de terminal clásico y generación automática de contenido histórico almacenado en Supabase.',
         },
         {
           title: 'Sistema de Inventario para CDCE',
@@ -143,6 +149,37 @@ export const translations: Record<Language, Translations> = {
             'Como trabajador en AgroTrujillo, noté un problema al gestionar a los productores al otorgarles préstamos, así que decidí desarrollar un sistema que permite administrar los préstamos otorgados a los productores en el área de Gestión Productiva.',
         },
       ],
+      otherProjectsTitle: 'Otros Proyectos',
+      otherProjectsSubtitle: '',
+      otherItems: [
+        {
+          title: 'Portafolio Personal',
+          description: 'Mi portafolio web personal construido con React, TypeScript y Vite. Incluye animaciones suaves, modo oscuro y diseño responsive.',
+        },
+        {
+          title: 'API REST de Gestión',
+          description: 'API RESTful desarrollada con Node.js y Express para gestión de recursos. Incluye autenticación JWT y documentación con Swagger.',
+        },
+        {
+          title: 'Dashboard Analítico',
+          description: 'Panel de control interactivo con Next.js y Tailwind CSS para visualización de datos en tiempo real con gráficos dinámicos.',
+        },
+        {
+          title: 'App Móvil de Tareas',
+          description: 'Aplicación móvil multiplataforma con React Native para gestión de tareas. Sincronización en tiempo real con Firebase.',
+        },
+        {
+          title: 'E-commerce Frontend',
+          description: 'Interfaz de tienda online moderna con Vue.js, Vuex para estado global y diseño responsive con Sass.',
+        },
+        {
+          title: 'Sistema de Blog',
+          description: 'Plataforma de blog completa con Python y Django. Incluye sistema de comentarios, categorías y búsqueda avanzada.',
+        },
+      ],
+      showMore: 'Mostrar Más',
+      showLess: 'Mostrar Menos',
+      hideProjects: 'Ocultar Proyectos',
     },
     contact: {
       subtitle: '04. ¿Cuál es el siguiente paso?',
@@ -223,9 +260,9 @@ export const translations: Record<Language, Translations> = {
             'This is the official website of the company that includes all relevant information about the service.',
         },
         {
-          title: 'LimpiVen - Cleaning Services App',
+          title: 'Venezuelan Ephemeris',
           description:
-            'LimpiVen is a mobile application designed to connect users with cleaning services in Venezuela. The app streamlines the process of finding, booking, and managing cleaning professionals for homes and businesses.',
+            'Modern web application that generates and displays daily historical ephemeris from Venezuela. Built with Next.js and Gemini AI, it features a beautiful colonial-style interface with classic terminal effects and automatic generation of historical content stored in Supabase.',
         },
         {
           title: 'Inventory System for CDCE',
@@ -238,6 +275,37 @@ export const translations: Record<Language, Translations> = {
             'As a worker at AgroTrujillo, I noticed a problem when managing producers when granting them loans, so I decided to develop a system that allows managing loans granted to producers in the area of Productive Management.',
         },
       ],
+      otherProjectsTitle: 'Other Projects',
+      otherProjectsSubtitle: '',
+      otherItems: [
+        {
+          title: 'Personal Portfolio',
+          description: 'My personal web portfolio built with React, TypeScript and Vite. Features smooth animations, dark mode and responsive design.',
+        },
+        {
+          title: 'Management REST API',
+          description: 'RESTful API developed with Node.js and Express for resource management. Includes JWT authentication and Swagger documentation.',
+        },
+        {
+          title: 'Analytics Dashboard',
+          description: 'Interactive control panel with Next.js and Tailwind CSS for real-time data visualization with dynamic charts.',
+        },
+        {
+          title: 'Mobile Task App',
+          description: 'Cross-platform mobile application with React Native for task management. Real-time synchronization with Firebase.',
+        },
+        {
+          title: 'E-commerce Frontend',
+          description: 'Modern online store interface with Vue.js, Vuex for global state and responsive design with Sass.',
+        },
+        {
+          title: 'Blog System',
+          description: 'Complete blog platform with Python and Django. Includes comment system, categories and advanced search.',
+        },
+      ],
+      showMore: 'Show More',
+      showLess: 'Show Less',
+      hideProjects: 'Hide Projects',
     },
     contact: {
       subtitle: "04. What's Next?",

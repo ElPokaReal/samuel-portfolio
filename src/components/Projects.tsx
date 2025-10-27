@@ -2,7 +2,11 @@ import { Github, ExternalLink } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { projectData } from '../data/projectLinks';
 
-const Projects = () => {
+interface ProjectsProps {
+  onShowMore: () => void;
+}
+
+const Projects = ({ onShowMore }: ProjectsProps) => {
   const { t } = useLanguage();
   const projects = t.projects.items.map((project, index) => ({
     ...project,
@@ -91,9 +95,9 @@ const Projects = () => {
         ))}
       </div>
       <div className="text-center mt-16">
-        <a
+        <button
+          onClick={onShowMore}
           className="group relative inline-flex items-center justify-center overflow-hidden rounded-lg px-8 py-3 font-bold text-accent transition-all duration-300 hover:text-white"
-          href="#"
         >
           <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
           <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent"></span>
@@ -106,7 +110,7 @@ const Projects = () => {
             </svg>
             {t.projects.viewMore}
           </span>
-        </a>
+        </button>
       </div>
     </section>
   );

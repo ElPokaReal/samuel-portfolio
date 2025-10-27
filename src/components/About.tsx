@@ -24,7 +24,7 @@ const About = () => {
               <img
                 className="w-full h-full object-cover filter grayscale hover:filter-none transition-all duration-300"
                 alt="Foto profesional"
-                src="https://img.freepik.com/vector-gratis/ilustracion-icono-galeria_53876-27002.jpg?semt=ais_hybrid&w=740&q=80"
+                src="/samuel-portfolio/profile.webp"
               />
             </div>
           </div>

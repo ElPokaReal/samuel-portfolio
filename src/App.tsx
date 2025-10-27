@@ -1,13 +1,39 @@
+import { useState } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
+import OtherProjects from './components/OtherProjects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { LanguageProvider } from './contexts/LanguageContext';
 
 function App() {
+  const [showOtherProjects, setShowOtherProjects] = useState(false);
+
+  const handleShowMore = () => {
+    setShowOtherProjects(true);
+    // Scroll suave a la sección después de un pequeño delay para que se renderice
+    setTimeout(() => {
+      document.getElementById('other-projects')?.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, 100);
+  };
+
+  const handleHide = () => {
+    // Scroll suave de vuelta a proyectos antes de ocultar
+    document.getElementById('projects')?.scrollIntoView({ 
+      behavior: 'smooth',
+      block: 'start'
+    });
+    setTimeout(() => {
+      setShowOtherProjects(false);
+    }, 500);
+  };
+
   return (
     <LanguageProvider>
       <div className="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
@@ -19,7 +45,8 @@ function App() {
                 <Hero />
                 <About />
                 <Experience />
-                <Projects />
+                <Projects onShowMore={handleShowMore} />
+                {showOtherProjects && <OtherProjects onHide={handleHide} />}
                 <Contact />
               </main>
               <Footer />
