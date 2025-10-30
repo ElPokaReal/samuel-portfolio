@@ -139,19 +139,24 @@ export const translations: Record<Language, Translations> = {
             'Aplicación web moderna que genera y muestra diariamente efemérides históricas de Venezuela. Desarrollada con Next.js y Gemini AI, presenta una hermosa interfaz de estilo colonial con efectos de terminal clásico y generación automática de contenido histórico almacenado en Supabase.',
         },
         {
+          title: 'Better Resume',
+          description:
+            'Generador profesional de currículums con editor intuitivo y vista previa en tiempo real. Incluye soporte multiidioma (inglés y español), múltiples plantillas personalizables, temas de color, autenticación OAuth, almacenamiento en la nube y exportación a PDF optimizada para ATS. Desarrollado con React, TypeScript, GSAP y Supabase.',
+        },
+        {
           title: 'Sistema de Inventario para CDCE',
           description:
             'He desarrollado un sistema de gestión de inventario que ayuda a los usuarios a rastrear, organizar y controlar el stock en diferentes zonas o áreas. Proporciona una interfaz simple para gestionar artículos, cantidades y ubicaciones de manera eficiente.',
-        },
-        {
-          title: 'Sistema de Gestión de Préstamos AgroTrujillo',
-          description:
-            'Como trabajador en AgroTrujillo, noté un problema al gestionar a los productores al otorgarles préstamos, así que decidí desarrollar un sistema que permite administrar los préstamos otorgados a los productores en el área de Gestión Productiva.',
         },
       ],
       otherProjectsTitle: 'Otros Proyectos',
       otherProjectsSubtitle: '',
       otherItems: [
+        {
+          title: 'Sistema de Gestión de Préstamos AgroTrujillo',
+          description:
+            'Como trabajador en AgroTrujillo, noté un problema al gestionar a los productores al otorgarles préstamos, así que decidí desarrollar un sistema que permite administrar los préstamos otorgados a los productores en el área de Gestión Productiva.',
+        },
         {
           title: 'Portafolio Personal',
           description: 'Mi portafolio web personal construido con React, TypeScript y Vite. Incluye animaciones suaves, modo oscuro y diseño responsive.',
@@ -265,19 +270,24 @@ export const translations: Record<Language, Translations> = {
             'Modern web application that generates and displays daily historical ephemeris from Venezuela. Built with Next.js and Gemini AI, it features a beautiful colonial-style interface with classic terminal effects and automatic generation of historical content stored in Supabase.',
         },
         {
+          title: 'Better Resume',
+          description:
+            'Professional resume generator with intuitive editor and real-time preview. Features multilingual support (English & Spanish), multiple customizable templates, color themes, OAuth authentication, cloud storage, and ATS-optimized PDF export. Built with React, TypeScript, GSAP, and Supabase.',
+        },
+        {
           title: 'Inventory System for CDCE',
           description:
             "I've made an inventory management system that helps users track, organize, and control stock across different zones or areas. It provides a simple interface for managing items, quantities, and locations efficiently.",
-        },
-        {
-          title: 'AgroTrujillo Loans Management System',
-          description:
-            'As a worker at AgroTrujillo, I noticed a problem when managing producers when granting them loans, so I decided to develop a system that allows managing loans granted to producers in the area of Productive Management.',
         },
       ],
       otherProjectsTitle: 'Other Projects',
       otherProjectsSubtitle: '',
       otherItems: [
+        {
+          title: 'AgroTrujillo Loans Management System',
+          description:
+            'As a worker at AgroTrujillo, I noticed a problem when managing producers when granting them loans, so I decided to develop a system that allows managing loans granted to producers in the area of Productive Management.',
+        },
         {
           title: 'Personal Portfolio',
           description: 'My personal web portfolio built with React, TypeScript and Vite. Features smooth animations, dark mode and responsive design.',

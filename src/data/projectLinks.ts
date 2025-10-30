@@ -20,6 +20,13 @@ export const projectData: ProjectData[] = [
     live: 'https://ephemeris-venezuela-rho-livid.vercel.app/',
   },
   {
+    // Better Resume
+    technologies: ['React', 'TypeScript', 'GSAP', 'Supabase'],
+    image: '/samuel-portfolio/betterresume.webp',
+    github: 'https://github.com/ElPokaReal/better-resume',
+    live: 'https://better-resume-gen.netlify.app/',
+  },
+  {
     // Inventory System for CDCE
     technologies: ['React', 'Node.js', 'MySQL', 'Express'],
     image: '/samuel-portfolio/inventariozona.webp',

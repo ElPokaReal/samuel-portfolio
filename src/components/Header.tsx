@@ -92,7 +92,7 @@ const Header = () => {
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
             {/* Logo */}
             <div className="flex w-full justify-between lg:w-auto">
-              <a href="/" className="flex items-center gap-3">
+              <a href="/samuel-portfolio" className="flex items-center gap-3">
                 <div className="text-accent text-2xl">
                   <Terminal />
                 </div>
