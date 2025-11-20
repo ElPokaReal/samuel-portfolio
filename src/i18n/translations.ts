@@ -79,7 +79,7 @@ export const translations: Record<Language, Translations> = {
       projects: 'Proyectos',
       contact: 'Contacto',
       cv: 'CV',
-      cvUrl: '/samuel-aranguren-cv.pdf',
+      cvUrl: '/samuel-portfolio/samuel-aranguren-cv.pdf',
     },
     hero: {
       greeting: 'Hola, mi nombre es',
@@ -210,7 +210,7 @@ export const translations: Record<Language, Translations> = {
       projects: 'Projects',
       contact: 'Contact',
       cv: 'Resume',
-      cvUrl: '/samuel-aranguren-cv.pdf',
+      cvUrl: '/samuel-portfolio/samuel-aranguren-cv.pdf',
     },
     hero: {
       greeting: 'Hi, my name is',
