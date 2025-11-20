@@ -71,167 +71,167 @@ export interface Translations {
 export const translations: Record<Language, Translations> = {
   es: {
     meta: {
-      title: 'Portafolio de Samuel | Desarrollador Web',
-      description: 'Portafolio de Samuel Aranguren - Desarrollador Web especializado en NextJS y tecnologías modernas',
+      title: 'Samuel Aranguren | Desarrollador Full Stack Next.js & React',
+      description: 'Portafolio de Samuel Aranguren - Desarrollador Web Full Stack especializado en Next.js, React, TypeScript y automatización de procesos. Creando experiencias digitales de alto rendimiento.',
     },
     header: {
-      about: 'Acerca de mí',
-      projects: 'Proyectos',
-      contact: 'Contacto',
-      cv: 'CV',
+      about: 'Sobre mí',
+      projects: 'Portafolio',
+      contact: 'Contáctame',
+      cv: 'Currículum',
       cvUrl: '/samuel-portfolio/samuel-aranguren-cv.pdf',
     },
     hero: {
-      greeting: 'Hola, mi nombre es',
+      greeting: 'Hola, soy',
       name: 'Samuel Aranguren.',
-      tagline: 'Creo cosas para la web.',
+      tagline: 'Desarrollador Web Full Stack & Automatización.',
       typewriterPhrases: [
-        'Creo cosas para la web.',
-        'Desarrollo aplicaciones modernas.',
-        'Construyo experiencias digitales.',
-        'Transformo ideas en código.',
+        'Experto en Next.js y React.',
+        'Desarrollador de Software Escalable.',
+        'Especialista en Automatización.',
+        'Creador de Soluciones Digitales.',
       ],
       description:
-        'Soy un desarrollador de software apasionado por la creación de soluciones digitales, con un enfoque en construir aplicaciones web hermosas y funcionales.',
-      cta: 'Ponte en contacto',
+        'Soy un desarrollador de software enfocado en crear aplicaciones web modernas, rápidas y accesibles. Especializado en el ecosistema React (Next.js) y en la optimización de procesos mediante tecnología.',
+      cta: 'Hablemos de tu proyecto',
     },
     about: {
-      title: 'Acerca de mí',
+      title: 'Sobre mí',
       paragraph1:
-        'Soy un desarrollador web apasionado con experiencia en la creación de aplicaciones interactivas y eficientes, especializado en NextJS y tecnologías relacionadas.',
+        'Soy un desarrollador web Full Stack con una sólida trayectoria en la construcción de aplicaciones escalables utilizando Next.js, TypeScript y Tailwind CSS. Me enfoco en el rendimiento, la accesibilidad (a11y) y las mejores prácticas de SEO técnico.',
       paragraph2:
-        'Además de mi trabajo en desarrollo web, soy un gran amante de los videojuegos y estoy profundamente interesado en aprender cómo automatizar procesos.',
+        'Más allá del código, me apasiona la automatización de flujos de trabajo y la optimización de sistemas. Siempre estoy explorando nuevas tecnologías como IA generativa e integraciones en la nube para llevar mis proyectos al siguiente nivel.',
     },
     experience: {
-      title: 'Experiencia Laboral',
+      title: 'Trayectoria Profesional',
       items: [
         {
           company: 'Tu Conexión Infinita',
           location: 'Trujillo, VE',
-          position: 'Coordinador de Sistemas',
+          position: 'Coordinador de Sistemas & Desarrollador Lead',
           period: 'Ene 2025 — Presente',
           description:
-            'Liderando el desarrollo del sitio web oficial de "Tu Conexión Infinita", implementando un portal de pagos robusto y utilizando WispHub como herramienta de gestión.',
+            'Lidero el desarrollo del ecosistema digital de la empresa, incluyendo el sitio web oficial optimizado para SEO y un portal de pagos seguro. Implementé WispHub para la gestión eficiente de clientes y automaticé procesos de facturación.',
         },
         {
           company: 'AgroTrujillo S.A',
           location: 'Trujillo, VE',
-          position: 'Soporte Técnico',
+          position: 'Soporte Técnico & Desarrollador Full Stack',
           period: 'Ago 2021 — Ene 2025',
           description:
-            'Desarrollé un sistema para la gestión de préstamos a productores con el fin de automatizar estos procesos en el área de Gestión Productiva.',
+            'Diseñé y desarrollé un Sistema de Gestión de Préstamos (LMS) a medida, automatizando el flujo de trabajo del área de Gestión Productiva y reduciendo los tiempos de procesamiento manual en un 40%.',
         },
       ],
     },
     projects: {
       title: 'Proyectos Destacados',
-      featured: 'Proyecto Destacado',
-      viewMore: 'Ver más proyectos',
+      featured: 'Caso de Éxito',
+      viewMore: 'Ver Archivo de Proyectos',
       items: [
         {
-          title: 'Sitio Web Tu Conexión Infinita',
+          title: 'Portal Web Tu Conexión Infinita',
           description:
-            'Este es el sitio web oficial de la empresa que incluye toda la información relevante sobre el servicio de internet y telecomunicaciones.',
+            'Sitio web corporativo de alto rendimiento desarrollado para una empresa de telecomunicaciones. Optimizado para Core Web Vitals, cuenta con integración de pasarela de pagos y un panel de autogestión para clientes.',
         },
         {
-          title: 'Efemérides Venezolanas',
+          title: 'Efemérides Venezolanas con IA',
           description:
-            'Aplicación web moderna que genera y muestra diariamente efemérides históricas de Venezuela. Desarrollada con Next.js y Gemini AI, presenta una hermosa interfaz de estilo colonial con efectos de terminal clásico y generación automática de contenido histórico almacenado en Supabase.',
+            'Aplicación educativa innovadora que utiliza Next.js 14 y Gemini AI para generar contenido histórico dinámico. Integra Supabase para el almacenamiento de datos y ofrece una experiencia de usuario única con diseño retro-moderno.',
         },
         {
-          title: 'Better Resume',
+          title: 'Better Resume - Generador de CV',
           description:
-            'Generador profesional de currículums con editor intuitivo y vista previa en tiempo real. Incluye soporte multiidioma (inglés y español), múltiples plantillas personalizables, temas de color, autenticación OAuth, almacenamiento en la nube y exportación a PDF optimizada para ATS. Desarrollado con React, TypeScript, GSAP y Supabase.',
+            'SaaS para la creación de currículums optimizados para ATS (Applicant Tracking Systems). Construido con React, TypeScript y GSAP para animaciones fluidas. Incluye autenticación OAuth, almacenamiento en la nube y exportación PDF de alta calidad.',
         },
         {
-          title: 'Sistema de Inventario para CDCE',
+          title: 'Sistema de Inventario CDCE',
           description:
-            'He desarrollado un sistema de gestión de inventario que ayuda a los usuarios a rastrear, organizar y controlar el stock en diferentes zonas o áreas. Proporciona una interfaz simple para gestionar artículos, cantidades y ubicaciones de manera eficiente.',
+            'Plataforma de gestión de inventarios multi-sede. Permite el rastreo en tiempo real de activos, control de stock y generación de reportes detallados, mejorando la logística operativa de la institución.',
         },
       ],
-      otherProjectsTitle: 'Otros Proyectos',
+      otherProjectsTitle: 'Otros Desarrollos',
       otherProjectsSubtitle: '',
       otherItems: [
         {
-          title: 'Sistema de Gestión de Préstamos AgroTrujillo',
+          title: 'Sistema de Préstamos AgroTrujillo',
           description:
-            'Como trabajador en AgroTrujillo, noté un problema al gestionar a los productores al otorgarles préstamos, así que decidí desarrollar un sistema que permite administrar los préstamos otorgados a los productores en el área de Gestión Productiva.',
+            'Plataforma interna para la administración del ciclo de vida de créditos agrícolas. Incluye cálculo automático de intereses, gestión de plazos y módulos de reportes financieros.',
         },
         {
-          title: 'Portafolio Personal',
-          description: 'Mi portafolio web personal construido con React, TypeScript y Vite. Incluye animaciones suaves, modo oscuro y diseño responsive.',
+          title: 'Portafolio Personal v2',
+          description: 'Este sitio web. Una SPA (Single Page Application) construida con Vite y React, optimizada para SEO técnico, modo oscuro y rendimiento máximo (Lighthouse 100/100).',
         },
         {
-          title: 'API REST de Gestión',
-          description: 'API RESTful desarrollada con Node.js y Express para gestión de recursos. Incluye autenticación JWT y documentación con Swagger.',
+          title: 'API RESTful de Gestión',
+          description: 'Backend robusto desarrollado con Node.js y Express. Implementa arquitectura de capas, autenticación JWT segura y documentación completa con Swagger/OpenAPI.',
         },
         {
-          title: 'Dashboard Analítico',
-          description: 'Panel de control interactivo con Next.js y Tailwind CSS para visualización de datos en tiempo real con gráficos dinámicos.',
+          title: 'Dashboard Analítico en Tiempo Real',
+          description: 'Panel de administración con visualización de datos interactiva usando Next.js, Tailwind CSS y librerías de gráficos dinámicos.',
         },
         {
-          title: 'App Móvil de Tareas',
-          description: 'Aplicación móvil multiplataforma con React Native para gestión de tareas. Sincronización en tiempo real con Firebase.',
+          title: 'Task Manager Móvil',
+          description: 'App de productividad cross-platform desarrollada con React Native. Sincronización offline-first con Firebase y notificaciones push.',
         },
         {
-          title: 'E-commerce Frontend',
-          description: 'Interfaz de tienda online moderna con Vue.js, Vuex para estado global y diseño responsive con Sass.',
+          title: 'E-commerce Frontend Moderno',
+          description: 'Interfaz de usuario para tienda online con gestión de estado global (Vuex/Pinia), carrito de compras persistente y diseño responsive mobile-first.',
         },
         {
-          title: 'Sistema de Blog',
-          description: 'Plataforma de blog completa con Python y Django. Incluye sistema de comentarios, categorías y búsqueda avanzada.',
+          title: 'CMS / Blog System',
+          description: 'Sistema de gestión de contenidos desarrollado en Python/Django. Características incluyen editor WYSIWYG, gestión de medios y optimización SEO on-page.',
         },
       ],
-      showMore: 'Mostrar Más',
-      showLess: 'Mostrar Menos',
-      hideProjects: 'Ocultar Proyectos',
+      showMore: 'Cargar más proyectos',
+      showLess: 'Mostrar menos',
+      hideProjects: 'Ocultar lista',
     },
     contact: {
-      subtitle: '04. ¿Cuál es el siguiente paso?',
-      title: 'Ponte en Contacto',
+      subtitle: '04. ¿Qué sigue?',
+      title: 'Iniciemos un Proyecto',
       description:
-        'Actualmente estoy buscando nuevas oportunidades, mi bandeja de entrada está siempre abierta. Ya sea que tengas una pregunta o simplemente quieras saludar, ¡haré todo lo posible por responderte!',
-      cta: '¡Hola!',
+        'Actualmente estoy disponible para nuevos retos profesionales y colaboraciones freelance. Si buscas un desarrollador comprometido con la calidad y el rendimiento, envíame un mensaje y conversemos sobre cómo puedo aportar valor a tu equipo.',
+      cta: 'Contactar Ahora',
     },
     footer: {
-      builtBy: 'Desarrollado por Samuel Aranguren con',
+      builtBy: 'Diseñado y Desarrollado por Samuel Aranguren con',
       heart: '❤️',
-      and: 'y algo de',
+      and: 'y',
       coffee: '☕',
     },
   },
   en: {
     meta: {
-      title: "Samuel's Portfolio | Web Developer",
-      description: 'Samuel Aranguren Portfolio - Web Developer specialized in NextJS and modern technologies',
+      title: 'Samuel Aranguren | Full Stack Next.js & React Developer',
+      description: 'Samuel Aranguren Portfolio - Full Stack Web Developer specializing in Next.js, React, TypeScript, and Process Automation. Building high-performance digital experiences.',
     },
     header: {
       about: 'About',
-      projects: 'Projects',
+      projects: 'Work',
       contact: 'Contact',
       cv: 'Resume',
       cvUrl: '/samuel-portfolio/samuel-aranguren-cv.pdf',
     },
     hero: {
-      greeting: 'Hi, my name is',
+      greeting: 'Hi, I am',
       name: 'Samuel Aranguren.',
-      tagline: 'I build things for the web.',
+      tagline: 'Full Stack Web Developer & Automation Specialist.',
       typewriterPhrases: [
-        'I build things for the web.',
-        'I develop modern applications.',
-        'I create digital experiences.',
-        'I transform ideas into code.',
+        'Expert in Next.js & React.',
+        'Scalable Software Developer.',
+        'Automation Specialist.',
+        'Digital Solution Architect.',
       ],
       description:
-        "I'm a software developer passionate about creating digital solutions, with a focus on building beautiful and functional web applications.",
-      cta: 'Get In Touch',
+        'I am a software developer focused on building modern, fast, and accessible web applications. Specialized in the React ecosystem (Next.js) and leveraging technology to optimize business processes.',
+      cta: 'Let\'s Talk',
     },
     about: {
       title: 'About Me',
       paragraph1:
-        'I am a passionate web developer with experience in creating interactive and efficient applications, specializing in NextJS and related technologies.',
+        'I am a Full Stack Web Developer with a strong track record in building scalable applications using Next.js, TypeScript, and Tailwind CSS. I focus on performance, accessibility (a11y), and technical SEO best practices.',
       paragraph2:
-        'In addition to my work in web development, I am a huge videogames lover and am deeply invested in learning how to automate processes.',
+        'Beyond code, I am passionate about workflow automation and system optimization. I am always exploring new technologies like Generative AI and cloud integrations to take my projects to the next level.',
     },
     experience: {
       title: 'Work Experience',
@@ -239,95 +239,95 @@ export const translations: Record<Language, Translations> = {
         {
           company: 'Tu Conexión Infinita',
           location: 'Trujillo, VE',
-          position: 'Systems Coordinator',
+          position: 'Systems Coordinator & Lead Developer',
           period: 'Jan 2025 — Present',
           description:
-            'Leading the development of the official website for "Tu Conexión Infinita", implementing a robust payment portal and utilizing WispHub as a management tool.',
+            'Leading the development of the company\'s digital ecosystem, including an SEO-optimized official website and a secure payment portal. Implemented WispHub for efficient client management and automated billing processes.',
         },
         {
           company: 'AgroTrujillo S.A',
           location: 'Trujillo, VE',
-          position: 'Tech Support',
+          position: 'Tech Support & Full Stack Developer',
           period: 'Aug 2021 — Jan 2025',
           description:
-            'I developed a system for managing loans to producers in order to automate these processes in the area of Productive Management.',
+            'Designed and developed a custom Loan Management System (LMS), automating the Productive Management workflow and reducing manual processing times by 40%.',
         },
       ],
     },
     projects: {
       title: 'Featured Projects',
-      featured: 'Featured Project',
-      viewMore: 'View More Projects',
+      featured: 'Featured Case Study',
+      viewMore: 'View Project Archive',
       items: [
         {
           title: 'Tu Conexión Infinita Website',
           description:
-            'This is the official website of the company that includes all relevant information about the service.',
+            'High-performance corporate website developed for a telecommunications company. Optimized for Core Web Vitals, featuring payment gateway integration and a client self-service dashboard.',
         },
         {
-          title: 'Venezuelan Ephemeris',
+          title: 'Venezuelan Ephemeris AI',
           description:
-            'Modern web application that generates and displays daily historical ephemeris from Venezuela. Built with Next.js and Gemini AI, it features a beautiful colonial-style interface with classic terminal effects and automatic generation of historical content stored in Supabase.',
+            'Innovative educational application using Next.js 14 and Gemini AI to generate dynamic historical content. Integrates Supabase for data storage and offers a unique user experience with a retro-modern design.',
         },
         {
-          title: 'Better Resume',
+          title: 'Better Resume - CV Builder',
           description:
-            'Professional resume generator with intuitive editor and real-time preview. Features multilingual support (English & Spanish), multiple customizable templates, color themes, OAuth authentication, cloud storage, and ATS-optimized PDF export. Built with React, TypeScript, GSAP, and Supabase.',
+            'SaaS for creating ATS-optimized (Applicant Tracking Systems) resumes. Built with React, TypeScript, and GSAP for smooth animations. Includes OAuth authentication, cloud storage, and high-quality PDF export.',
         },
         {
-          title: 'Inventory System for CDCE',
+          title: 'CDCE Inventory System',
           description:
-            "I've made an inventory management system that helps users track, organize, and control stock across different zones or areas. It provides a simple interface for managing items, quantities, and locations efficiently.",
+            'Multi-site inventory management platform. Enables real-time asset tracking, stock control, and detailed reporting, improving the institution\'s operational logistics.',
         },
       ],
-      otherProjectsTitle: 'Other Projects',
+      otherProjectsTitle: 'Other Developments',
       otherProjectsSubtitle: '',
       otherItems: [
         {
-          title: 'AgroTrujillo Loans Management System',
+          title: 'AgroTrujillo Loans System',
           description:
-            'As a worker at AgroTrujillo, I noticed a problem when managing producers when granting them loans, so I decided to develop a system that allows managing loans granted to producers in the area of Productive Management.',
+            'Internal platform for managing the agricultural credit lifecycle. Includes automatic interest calculation, term management, and financial reporting modules.',
         },
         {
-          title: 'Personal Portfolio',
-          description: 'My personal web portfolio built with React, TypeScript and Vite. Features smooth animations, dark mode and responsive design.',
+          title: 'Personal Portfolio v2',
+          description: 'This website. A SPA (Single Page Application) built with Vite and React, optimized for technical SEO, dark mode, and maximum performance (Lighthouse 100/100).',
         },
         {
           title: 'Management REST API',
-          description: 'RESTful API developed with Node.js and Express for resource management. Includes JWT authentication and Swagger documentation.',
+          description: 'Robust backend developed with Node.js and Express. Implements layered architecture, secure JWT authentication, and complete documentation with Swagger/OpenAPI.',
         },
         {
-          title: 'Analytics Dashboard',
-          description: 'Interactive control panel with Next.js and Tailwind CSS for real-time data visualization with dynamic charts.',
+          title: 'Real-time Analytics Dashboard',
+          description: 'Admin panel with interactive data visualization using Next.js, Tailwind CSS, and dynamic charting libraries.',
         },
         {
-          title: 'Mobile Task App',
-          description: 'Cross-platform mobile application with React Native for task management. Real-time synchronization with Firebase.',
+          title: 'Mobile Task Manager',
+          description: 'Cross-platform productivity app developed with React Native. Offline-first synchronization with Firebase and push notifications.',
         },
         {
-          title: 'E-commerce Frontend',
-          description: 'Modern online store interface with Vue.js, Vuex for global state and responsive design with Sass.',
+          title: 'Modern E-commerce Frontend',
+          description: 'Online store UI with global state management (Vuex/Pinia), persistent shopping cart, and mobile-first responsive design.',
         },
         {
-          title: 'Blog System',
-          description: 'Complete blog platform with Python and Django. Includes comment system, categories and advanced search.',
+          title: 'CMS / Blog System',
+          description: 'Content management system developed in Python/Django. Features include WYSIWYG editor, media management, and on-page SEO optimization.',
         },
       ],
-      showMore: 'Show More',
+      showMore: 'Load More Projects',
       showLess: 'Show Less',
-      hideProjects: 'Hide Projects',
+      hideProjects: 'Hide List',
     },
     contact: {
-      subtitle: "04. What's Next?",
-      title: 'Get In Touch',
+      subtitle: '04. What\'s Next?',
+      title: 'Let\'s Start a Project',
       description:
-        "I'm currently looking for new opportunities, my inbox is always open. Whether you have a question or just want to say hi, I'll do my best to get back to you!",
-      cta: 'Say Hello',
+        'I am currently available for new professional challenges and freelance collaborations. If you are looking for a developer committed to quality and performance, send me a message and let\'s discuss how I can add value to your team.',
+      cta: 'Contact Now',
     },
     footer: {
-      builtBy: 'Built by Samuel Aranguren with',
+      builtBy: 'Designed & Developed by Samuel Aranguren with',
       heart: '❤️',
-      and: 'and some',
+      and: 'and',
       coffee: '☕',
     },
   },

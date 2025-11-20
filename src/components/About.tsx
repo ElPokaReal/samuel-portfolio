@@ -16,7 +16,7 @@ const About = () => {
             <p>{t.about.paragraph2}</p>
             <img 
               src="https://skillicons.dev/icons?i=react,js,ts,nodejs,php,flutter,express,nextjs,supabase,postgresql,mysql,sqlite,html,css,git,laravel,tailwind&theme=light&perline=6" 
-              alt="Tech Stack"
+              alt="Tecnologías de desarrollo web: React, Next.js, TypeScript, Node.js, Supabase, SQL y más"
               loading="lazy"
             />
           </div>
@@ -27,7 +27,7 @@ const About = () => {
             <div className="relative w-full h-full rounded-lg overflow-hidden z-10 bg-slate-gray/20">
               <img
                 className="w-full h-full object-cover filter grayscale hover:filter-none transition-all duration-300"
-                alt="Foto profesional"
+                alt="Samuel Aranguren - Desarrollador Web Full Stack en Venezuela"
                 src="/samuel-portfolio/profile.webp"
                 loading="eager"
                 fetchPriority="high"
