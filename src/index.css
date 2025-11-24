@@ -2,14 +2,17 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-primary: #5A8DFF;
-  --color-accent: #64FFDA;
-  --color-background-light: #CCD6F6;
+  --color-primary: #f8fe06;
+  --color-secondary: #02c57a;
+  --color-accent: #02c57a;
+  --color-background-light: #ffffff;
   --color-background-dark: #0A192F;
-  --color-text-light: #0A192F;
-  --color-text-dark: #CCD6F6;
-  --color-slate-gray: #8892B0;
-  
+  /* Keeping for dark mode if needed, but primary focus is light/cartoon */
+  --color-text-main: #000000;
+  --color-text-light: #000000;
+  --color-text-dark: #ffffff;
+  --color-slate-gray: #4a5568;
+
   --font-family-display: 'Space Grotesk', sans-serif;
   --font-family-body: 'Poppins', sans-serif;
 }
@@ -20,38 +23,25 @@ html {
 
 body {
   font-family: var(--font-family-body);
-}
-
-@keyframes blink {
-  0%, 49% {
-    opacity: 1;
-  }
-  50%, 100% {
-    opacity: 0;
-  }
-}
-
-.animate-blink {
-  animation: blink 1s step-end infinite;
+  color: var(--color-text-main);
 }
 
 /* Firefox */
-*{
+* {
   scrollbar-width: auto;
-  scrollbar-color: #5a8dff #0a192f;
+  scrollbar-color: #f8fe06 #000000;
 }
 
 /* Other browsers */
-*::-webkit-scrollbar{
+*::-webkit-scrollbar {
   width: 16px;
 }
 
-*::-webkit-scrollbar-track{
-  background: #0a192f;
+*::-webkit-scrollbar-track {
+  background: #000000;
 }
 
-*::-webkit-scrollbar-thumb{
-  background-color: #5a8dff;
-  border-radius: 0px;
-  border: 3px solid #ffffff;
+*::-webkit-scrollbar-thumb {
+  background-color: #f8fe06;
+  border: 3px solid #000000;
 }

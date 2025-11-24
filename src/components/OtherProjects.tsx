@@ -33,7 +33,7 @@ const OtherProjects = ({ onHide }: OtherProjectsProps) => {
             <Code2 size={24} className="text-accent mt-1 flex-shrink-0" />
             <div className="space-y-3">
               <p className="text-slate-gray text-base">
-                <span className="text-primary">{'// '}</span>
+                <span className="text-primary drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]">{'// '}</span>
                 {language === 'es' 
                   ? 'Próximamente: Más proyectos increíbles en camino'
                   : 'Coming soon: More awesome projects on the way'}
@@ -45,11 +45,11 @@ const OtherProjects = ({ onHide }: OtherProjectsProps) => {
                   : `await buildingNewProjects()${dots}`}
               </p>
               <p className="text-slate-gray/70 text-xs mt-4">
-                <span className="text-primary">{'/* '}</span>
+                <span className="text-primary drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]">{'/* '}</span>
                 {language === 'es'
                   ? 'Estoy trabajando en nuevos proyectos emocionantes. ¡Vuelve pronto!'
                   : 'I\'m working on exciting new projects. Check back soon!'}
-                <span className="text-primary">{' */'}</span>
+                <span className="text-primary drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]">{' */'}</span>
               </p>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import { useLanguage } from '../contexts/LanguageContext';
 import { TypewriterEffect } from './TypewriterEffect';
-import { ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
   const { t } = useLanguage();
@@ -9,7 +9,6 @@ const Hero = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Ocultar flecha cuando se hace scroll más de 100px
       if (window.scrollY > 100) {
         setShowArrow(false);
       } else {
@@ -29,60 +28,67 @@ const Hero = () => {
   };
 
   return (
-    <section className="py-20 md:py-32 relative">
-      <div className="flex flex-col gap-6 px-4">
-        <div className="flex flex-col gap-4 text-left">
-          <h1 className="text-primary text-base font-medium font-[family-name:var(--font-family-display)]">
-            {t.hero.greeting}
-          </h1>
-          <h2 className="text-text-light dark:text-text-dark text-4xl sm:text-5xl md:text-6xl font-black leading-tight tracking-tighter font-[family-name:var(--font-family-display)]">
-            {t.hero.name}
-          </h2>
-          <h3 className="text-text-light dark:text-text-dark text-4xl md:text-6xl font-bold leading-tight tracking-[-0.015em] font-[family-name:var(--font-family-display)]">
-            <TypewriterEffect phrases={t.hero.typewriterPhrases} />
-          </h3>
-          <p className="text-slate-gray text-base font-normal leading-relaxed max-w-xl mt-4">
-            {t.hero.description}
-          </p>
-        </div>
-        <div className="mt-8">
-          <a
-            className="flex min-w-[84px] max-w-[200px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors"
-            href="#contact"
+    <section className="min-h-screen flex flex-col justify-center relative overflow-hidden bg-background-light">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 z-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#000 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+
+      <div className="container mx-auto px-4 z-20 relative">
+        <div className="flex flex-col gap-6 max-w-4xl">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col gap-4 text-left"
           >
-            <span className="truncate">{t.hero.cta}</span>
-          </a>
+            <h1 className="text-black text-xl md:text-2xl font-bold font-[family-name:var(--font-family-display)] tracking-wide bg-primary w-fit px-2 cartoon-border cartoon-shadow transform -rotate-1">
+              {t.hero.greeting}
+            </h1>
+            <h2 className="text-primary text-6xl sm:text-7xl md:text-8xl font-black leading-tight tracking-tighter font-[family-name:var(--font-family-display)] drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] stroke-black text-shadow-cartoon">
+              {t.hero.name}
+            </h2>
+            <h3 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-[-0.015em] font-[family-name:var(--font-family-display)]">
+              <TypewriterEffect phrases={t.hero.typewriterPhrases} />
+            </h3>
+            <p className="text-black text-lg md:text-xl font-medium leading-relaxed max-w-2xl mt-6 border-l-4 border-black pl-4">
+              {t.hero.description}
+            </p>
+          </motion.div>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mt-10"
+          >
+            <a
+              className="group relative inline-flex h-16 items-center justify-center overflow-hidden bg-primary px-10 font-bold text-black transition-all duration-300 cartoon-border cartoon-shadow cartoon-shadow-hover"
+              href="#contact"
+            >
+              <span className="mr-2 text-xl">{t.hero.cta}</span>
+              <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+            </a>
+          </motion.div>
         </div>
       </div>
 
-      {/* Flechas animadas con efecto de profundidad */}
-      <button
+      {/* Animated Arrow */}
+      <motion.button
+        initial={{ opacity: 0 }}
+        animate={{ opacity: showArrow ? 1 : 0, y: showArrow ? 0 : 20 }}
+        transition={{ duration: 0.5 }}
         onClick={scrollToAbout}
-        className={`absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer transition-all duration-500 ${
-          showArrow ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+        className={`absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer z-20 ${
+          !showArrow && 'pointer-events-none'
         }`}
         aria-label="Scroll to about section"
       >
-        <div className="relative">
-          {/* Flecha trasera 1 - más opaca */}
-          <ChevronDown 
-            size={40} 
-            className="absolute top-0 left-0 text-accent opacity-20 animate-bounce"
-            style={{ animationDelay: '0.1s' }}
-          />
-          {/* Flecha trasera 2 - opacidad media */}
-          <ChevronDown 
-            size={40} 
-            className="absolute top-0 left-0 text-accent opacity-40 animate-bounce"
-            style={{ animationDelay: '0.05s' }}
-          />
-          {/* Flecha principal */}
-          <ChevronDown 
-            size={40} 
-            className="relative text-accent hover:text-accent/80 transition-colors animate-bounce"
-          />
+        <div className="flex flex-col items-center gap-2">
+          <span className="text-xs text-black font-mono tracking-widest bg-white px-1 border-2 border-black">SCROLL</span>
+          <div className="w-[20px] h-12 border-2 border-black bg-white relative overflow-hidden rounded-full">
+            <div className="absolute top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-black rounded-full animate-bounce"></div>
+          </div>
         </div>
-      </button>
+      </motion.button>
     </section>
   );
 };

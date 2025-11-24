@@ -1,34 +1,78 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#64ffda;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#5a67d8;stop-opacity:1" />
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f8fe06;stop-opacity:1" />
     </linearGradient>
   </defs>
+
+  <!-- External Cables/Wires -->
+  <path d="M100 200 C 60 200, 40 300, 100 380" fill="none" stroke="#000" stroke-width="10" stroke-linecap="round" />
+  <path d="M412 200 C 452 200, 472 150, 412 100" fill="none" stroke="#000" stroke-width="10" stroke-linecap="round" />
   
-  <!-- Background -->
-  <rect width="100" height="100" fill="#0a192f" rx="20"/>
-  
-  <!-- Letter S - Bold and clear -->
-  <text x="50" y="75" 
-        font-family="Arial, sans-serif" 
-        font-size="70" 
-        font-weight="bold" 
-        text-anchor="middle" 
-        fill="url(#grad)">S</text>
-  
-  <!-- Code brackets accent -->
-  <path d="M 15 30 L 10 50 L 15 70" 
-        fill="none" 
-        stroke="#64ffda" 
-        stroke-width="3" 
-        stroke-linecap="round"
-        opacity="0.6"/>
-  
-  <path d="M 85 30 L 90 50 L 85 70" 
-        fill="none" 
-        stroke="#64ffda" 
-        stroke-width="3" 
-        stroke-linecap="round"
-        opacity="0.6"/>
+  <!-- 3D Depth Layer (Black Shadow) -->
+  <path d="M370 120 H200 C170 120 150 140 150 170 V200 C150 230 170 250 200 250 H310 C330 250 340 260 340 280 V310 C340 330 330 340 310 340 H160 L140 360 H310 C350 360 370 340 370 310 V280 C370 240 340 220 310 220 H200 C180 220 170 210 170 200 V170 C170 150 180 140 200 140 H370 V120 Z" fill="#000" transform="translate(15, 15)"/>
+
+  <!-- Main Body Shape -->
+  <path d="M370 100 H190 C150 100 120 130 120 170 V200 C120 240 150 270 190 270 H310 C330 270 340 280 340 300 V320 C340 340 330 350 310 350 H150 L150 390 H310 C360 390 390 360 390 320 V300 C390 250 360 220 310 220 H200 C180 220 170 210 170 200 V170 C170 140 190 130 200 130 H370 V100 Z" 
+        fill="url(#bodyGrad)" stroke="#000" stroke-width="10" stroke-linejoin="round"/>
+
+  <!-- {S} Logo Text Area -->
+  <g transform="translate(200, 125)">
+    <text x="0" y="40" font-family="monospace" font-weight="900" font-size="45" fill="#000">{S}</text>
+    <!-- Connector line from text -->
+    <path d="M-10 25 H-30 V50" fill="none" stroke="#000" stroke-width="3" />
+    <rect x="-40" y="50" width="20" height="15" fill="#fff" stroke="#000" stroke-width="2" />
+    <line x1="-38" y1="55" x2="-22" y2="55" stroke="#000" stroke-width="1" />
+    <line x1="-38" y1="60" x2="-22" y2="60" stroke="#000" stroke-width="1" />
+  </g>
+
+  <!-- Robot Face Module -->
+  <g transform="translate(320, 120)">
+    <!-- Box -->
+    <rect x="0" y="0" width="60" height="45" rx="8" fill="#000" />
+    <!-- Screen Glare -->
+    <path d="M5 5 H20 V10 H5 Z" fill="#333" />
+    <!-- Eyes -->
+    <rect x="12" y="15" width="10" height="10" fill="#f8fe06" />
+    <rect x="38" y="15" width="10" height="10" fill="#f8fe06" />
+    <!-- Mouth -->
+    <rect x="20" y="32" width="20" height="4" fill="#f8fe06" />
+    <!-- Antenna -->
+    <line x1="30" y1="0" x2="30" y2="-15" stroke="#000" stroke-width="5" />
+    <circle cx="30" cy="-18" r="5" fill="#000" />
+    <!-- Wires from robot -->
+    <path d="M60 22 H70 V50" fill="none" stroke="#000" stroke-width="3" />
+  </g>
+
+  <!-- Bottom Circuit Module -->
+  <g transform="translate(150, 320)">
+     <path d="M0 0 H40 V30 H0 Z" fill="#f8fe06" stroke="#000" stroke-width="4" />
+     <text x="5" y="22" font-family="monospace" font-weight="bold" font-size="20" fill="#000">&gt;_</text>
+     <!-- Connection -->
+     <path d="M40 15 H60" fill="none" stroke="#000" stroke-width="4" />
+  </g>
+
+  <!-- Circuit Traces on Body -->
+  <g opacity="0.8">
+    <path d="M250 350 L280 350 L280 320" fill="none" stroke="#000" stroke-width="3" />
+    <circle cx="280" cy="320" r="4" fill="#000" />
+    
+    <path d="M220 220 L220 250 L250 250" fill="none" stroke="#000" stroke-width="3" />
+    <circle cx="250" cy="250" r="4" fill="#000" />
+    
+    <!-- Chip -->
+    <rect x="280" y="290" width="30" height="15" fill="#fff" stroke="#000" stroke-width="2" />
+    <line x1="285" y1="295" x2="305" y2="295" stroke="#000" stroke-width="1" />
+    <line x1="285" y1="300" x2="305" y2="300" stroke="#000" stroke-width="1" />
+  </g>
+
+  <!-- Background Circuit Patterns (Subtle) -->
+  <g opacity="0.1" stroke="#000" stroke-width="2">
+     <path d="M50 100 L100 100 L100 150" fill="none" />
+     <circle cx="100" cy="150" r="5" fill="#000" />
+     <path d="M460 400 L410 400 L410 350" fill="none" />
+     <circle cx="410" cy="350" r="5" fill="#000" />
+  </g>
+
 </svg>

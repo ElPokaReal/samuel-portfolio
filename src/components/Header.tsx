@@ -1,26 +1,48 @@
-import { useState, useEffect } from 'react';
-import { Menu, X, Terminal, Github, Linkedin, Languages } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Menu, X, Terminal, Github, Linkedin, Languages, FileText } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { cn } from '../lib/utils';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+  const [isHidden, setIsHidden] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  const { scrollY } = useScroll();
+  const lastScrollY = useRef(0);
 
   const toggleLanguage = () => {
     setLanguage(language === 'es' ? 'en' : 'es');
   };
 
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    // Determine if scrolled (for style changes if needed, though we use current scrollY for logic)
+    setIsScrolled(latest > 50);
+
+    // Check if we are at the bottom of the page (Footer visible)
+    const isAtBottom = window.innerHeight + latest >= document.documentElement.scrollHeight - 100;
+
+    if (isAtBottom) {
+      setIsHidden(true);
+    } else {
+      setIsHidden(false);
+    }
+
+    lastScrollY.current = latest;
+  });
+
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-
-      // Detectar sección activa
       const sections = ['about', 'projects', 'contact'];
-      const scrollPosition = window.scrollY + 100;
+      const scrollPosition = window.scrollY + 300;
+
+      // Check if we are at the bottom of the page
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50) {
+        setActiveSection('contact');
+        return;
+      }
 
       for (const section of sections) {
         const element = document.getElementById(section);
@@ -34,14 +56,9 @@ const Header = () => {
           }
         }
       }
-
-      // Si está en el top, no hay sección activa
-      if (window.scrollY < 100) {
-        setActiveSection('');
-      }
+      if (window.scrollY < 100) setActiveSection('');
     };
 
-    handleScroll(); // Llamar una vez al montar
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -50,7 +67,8 @@ const Header = () => {
     e.preventDefault();
     const element = document.getElementById(sectionId);
     if (element) {
-      const headerOffset = 80; // Altura aproximada del header
+      // For contact (footer), we might want to scroll a bit further down or just to the element
+      const headerOffset = sectionId === 'contact' ? 0 : 100;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -62,203 +80,144 @@ const Header = () => {
     }
   };
 
+  const navItems = [
+    { id: 'about', label: t.header.about },
+    { id: 'projects', label: t.header.projects },
+    { id: 'contact', label: t.header.contact },
+  ];
+
   return (
-    <header>
-      <nav
-        data-state={isMenuOpen ? 'active' : ''}
-        className="fixed z-50 w-full px-2 group"
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-4 pointer-events-none">
+      {/* Floating Command Center */}
+      <motion.nav
+        initial={{ y: -100, opacity: 0, scale: 0.8 }}
+        animate={{ 
+          y: isHidden ? -200 : 0, 
+          opacity: 1, 
+          scale: 1 
+        }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        className="pointer-events-auto bg-white border-[3px] border-black shadow-[4px_4px_0px_0px_#000] rounded-full px-2 py-2 flex items-center gap-2 md:gap-4 max-w-[90vw] md:max-w-fit"
       >
-        <motion.div
-          initial={false}
-          animate={isScrolled ? 'scrolled' : 'top'}
-          variants={{
-            top: {
-              maxWidth: '100%',
-              borderRadius: '0px',
-              marginTop: '0px',
-            },
-            scrolled: {
-              maxWidth: '1024px',
-              borderRadius: '16px',
-              marginTop: '8px',
-            },
-          }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-          className={cn(
-            'mx-auto px-6 transition-all duration-300 lg:px-12',
-            isScrolled && 'bg-background-light/50 dark:bg-background-dark/50 max-w-4xl rounded-2xl border border-slate-gray/30 backdrop-blur-lg lg:px-5'
-          )}
+        {/* Logo / Home */}
+        <a 
+          href="/samuel-portfolio" 
+          className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-black text-primary rounded-full border-2 border-black hover:bg-primary hover:text-black transition-colors"
+          aria-label="Home"
         >
-          <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
-            {/* Logo */}
-            <div className="flex w-full justify-between lg:w-auto">
-              <a href="/samuel-portfolio" className="flex items-center gap-3">
-                <div className="text-accent text-2xl">
-                  <Terminal />
-                </div>
-                <h2 className="text-text-light dark:text-text-dark text-lg font-bold leading-tight tracking-[-0.015em] font-[family-name:var(--font-family-display)]">
-                  SD
-                </h2>
-              </a>
+          <Terminal size={20} className="md:w-6 md:h-6" />
+        </a>
 
-              {/* Mobile Menu Button */}
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                aria-label={isMenuOpen ? 'Close Menu' : 'Open Menu'}
-                className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
+        {/* Divider */}
+        <div className="w-[2px] h-8 bg-black/10 hidden md:block"></div>
+
+        {/* Desktop Links */}
+        <ul className="hidden md:flex items-center gap-2">
+          {navItems.map((item) => (
+            <li key={item.id}>
+              <a
+                href={`#${item.id}`}
+                onClick={(e) => handleNavClick(e, item.id)}
+                className={cn(
+                  "px-4 py-2 rounded-full font-bold text-sm border-2 border-transparent transition-all duration-200",
+                  activeSection === item.id
+                    ? "bg-primary border-black shadow-[2px_2px_0px_0px_#000] -translate-y-1"
+                    : "hover:bg-gray-100 hover:border-black hover:-translate-y-0.5"
+                )}
               >
-                <Menu className="group-data-[state=active]:rotate-180 group-data-[state=active]:scale-0 group-data-[state=active]:opacity-0 m-auto size-6 duration-200" />
-                <X className="group-data-[state=active]:rotate-0 group-data-[state=active]:scale-100 group-data-[state=active]:opacity-100 absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 duration-200" />
-              </button>
-            </div>
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
 
-            {/* Desktop Navigation */}
-            <div className="absolute inset-0 m-auto hidden size-fit lg:block">
-              <ul className="flex gap-8 text-sm">
-                <li>
-                  <a
-                    className={cn(
-                      "block duration-150",
-                      activeSection === 'about' 
-                        ? 'text-accent' 
-                        : 'text-slate-gray hover:text-accent'
-                    )}
-                    href="#about"
-                    onClick={(e) => handleNavClick(e, 'about')}
-                  >
-                    {t.header.about}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className={cn(
-                      "block duration-150",
-                      activeSection === 'projects' 
-                        ? 'text-accent' 
-                        : 'text-slate-gray hover:text-accent'
-                    )}
-                    href="#projects"
-                    onClick={(e) => handleNavClick(e, 'projects')}
-                  >
-                    {t.header.projects}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    className={cn(
-                      "block duration-150",
-                      activeSection === 'contact' 
-                        ? 'text-accent' 
-                        : 'text-slate-gray hover:text-accent'
-                    )}
-                    href="#contact"
-                    onClick={(e) => handleNavClick(e, 'contact')}
-                  >
-                    {t.header.contact}
-                  </a>
-                </li>
-              </ul>
-            </div>
+        {/* Mobile Menu Toggle */}
+        <div className="md:hidden flex items-center">
+           <span className="font-bold text-sm mr-2 font-[family-name:var(--font-family-display)]">MENU</span>
+        </div>
 
-            {/* Desktop Buttons */}
-            <div className="bg-background-light dark:bg-background-dark group-data-[state=active]:block lg:group-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-3 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent">
-              <div className="lg:hidden">
-                <ul className="space-y-6 text-base">
-                  <li>
-                    <a
-                      className={cn(
-                        "block duration-150",
-                        activeSection === 'about' 
-                          ? 'text-accent' 
-                          : 'text-slate-gray hover:text-accent'
-                      )}
-                      href="#about"
-                      onClick={(e) => handleNavClick(e, 'about')}
-                    >
-                      {t.header.about}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className={cn(
-                        "block duration-150",
-                        activeSection === 'projects' 
-                          ? 'text-accent' 
-                          : 'text-slate-gray hover:text-accent'
-                      )}
-                      href="#projects"
-                      onClick={(e) => handleNavClick(e, 'projects')}
-                    >
-                      {t.header.projects}
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      className={cn(
-                        "block duration-150",
-                        activeSection === 'contact' 
-                          ? 'text-accent' 
-                          : 'text-slate-gray hover:text-accent'
-                      )}
-                      href="#contact"
-                      onClick={(e) => handleNavClick(e, 'contact')}
-                    >
-                      {t.header.contact}
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
+        {/* Actions Group */}
+        <div className="flex items-center gap-2">
+          {/* CV Button */}
           <a
-            className="group relative inline-flex items-center justify-center overflow-hidden rounded-lg px-4 h-10 font-bold text-accent transition-all duration-300 hover:text-white text-sm"
             href={t.header.cvUrl}
             target="_blank"
             rel="noopener noreferrer"
+            className="hidden md:flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-white text-black border-2 border-black rounded-full hover:bg-black hover:text-white transition-all hover:shadow-[2px_2px_0px_0px_#000] hover:-translate-y-0.5"
+            title={t.header.cv}
           >
-            <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-            <span className="absolute bottom-0 left-0 w-full h-0.5 bg-accent"></span>
-            <span className="absolute top-0 left-0 w-0.5 h-full bg-accent"></span>
-            <span className="absolute top-0 right-0 w-0.5 h-full bg-accent"></span>
-            <span className="absolute bottom-0 right-0 w-full h-0.5 bg-accent"></span>
-            <span className="relative z-10 flex items-center gap-2">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-              </svg>
-              {t.header.cv}
-            </span>
+            <FileText size={18} className="md:w-5 md:h-5" />
           </a>
-          <a
-            className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-transparent text-slate-gray hover:text-accent gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors"
-            href="https://github.com/ElPokaReal/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
+
+          {/* Language Toggle */}
+          <button
+            onClick={toggleLanguage}
+            className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center font-black text-xs md:text-sm bg-primary border-2 border-black rounded-full hover:shadow-[2px_2px_0px_0px_#000] hover:-translate-y-0.5 transition-all"
           >
-            <Github size={20} />
-          </a>
-          <a
-            className="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 bg-transparent text-slate-gray hover:text-accent gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5 transition-colors"
-            href="https://www.linkedin.com/in/samuel-aranguren-4447b31b4"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
+            {language.toUpperCase()}
+          </button>
+
+          {/* Mobile Menu Button (Hamburger) */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden w-10 h-10 flex items-center justify-center bg-black text-white rounded-full border-2 border-black active:scale-95 transition-transform"
           >
-            <Linkedin size={20} />
-          </a>
-                {/* Language Toggle Button */}
-                <button
-                  onClick={toggleLanguage}
-                  className="flex items-center justify-center gap-1.5 overflow-hidden rounded-lg h-10 px-3 bg-transparent text-slate-gray hover:text-accent hover:bg-accent/5 text-sm font-bold leading-normal tracking-[0.015em] transition-all"
-                  aria-label="Toggle language"
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+      </motion.nav>
+
+      {/* Mobile Menu Overlay (Comic Panel Style) */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            className="absolute top-24 left-4 right-4 bg-white border-[3px] border-black shadow-[8px_8px_0px_0px_#000] rounded-2xl p-6 z-40 pointer-events-auto md:hidden"
+          >
+            <div className="flex flex-col gap-4">
+              {navItems.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={(e) => handleNavClick(e, item.id)}
+                  className={cn(
+                    "block w-full text-center py-4 font-black text-xl border-2 border-black rounded-xl transition-all",
+                    activeSection === item.id
+                      ? "bg-primary shadow-[4px_4px_0px_0px_#000] -translate-y-1"
+                      : "bg-white hover:bg-gray-50 hover:shadow-[4px_4px_0px_0px_#000] hover:-translate-y-1"
+                  )}
                 >
-                  <Languages size={18} />
-                  <span className="uppercase text-xs">{language}</span>
-                </button>
+                  {item.label}
+                </a>
+              ))}
+              
+              <div className="h-px bg-black/10 my-2"></div>
+
+              <div className="flex gap-4">
+                <a
+                  href={t.header.cvUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 py-3 font-bold bg-black text-white border-2 border-black rounded-xl hover:bg-gray-900 transition-all"
+                >
+                  <FileText size={18} />
+                  CV
+                </a>
+                <div className="flex gap-2">
+                   <a href="https://github.com/ElPokaReal/" target="_blank" rel="noopener noreferrer" className="w-12 flex items-center justify-center border-2 border-black rounded-xl hover:bg-primary transition-colors">
+                    <Github size={20} />
+                  </a>
+                  <a href="https://www.linkedin.com/in/samuel-aranguren-4447b31b4" target="_blank" rel="noopener noreferrer" className="w-12 flex items-center justify-center border-2 border-black rounded-xl hover:bg-primary transition-colors">
+                    <Linkedin size={20} />
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
-        </motion.div>
-      </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

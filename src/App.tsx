@@ -8,6 +8,7 @@ import OtherProjects from './components/OtherProjects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import { useSEO } from './hooks/useSEO';
+import { ScrollReveal } from './components/ScrollReveal';
 
 function App() {
   useSEO();
@@ -36,23 +37,31 @@ function App() {
   };
 
   return (
-    <div className="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+    <div className="relative flex h-auto min-h-screen w-full flex-col bg-white text-black">
       <Header />
-      <div className="layout-container flex h-full grow flex-col">
-        <div className="px-4 md:px-10 lg:px-20 xl:px-40 flex flex-1 justify-center py-5">
-          <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
-            <main className="flex-1">
-              <Hero />
+      <main className="flex-1 w-full">
+        <Hero />
+        
+        <div className="layout-container flex flex-col items-center">
+          <div className="px-4 md:px-10 lg:px-20 xl:px-40 w-full max-w-[1200px]">
+            <ScrollReveal width="100%">
               <About />
+            </ScrollReveal>
+            <ScrollReveal width="100%">
               <Experience />
-              <Projects onShowMore={handleShowMore} />
-              {showOtherProjects && <OtherProjects onHide={handleHide} />}
-              <Contact />
-            </main>
-            <Footer />
-          </div>
+            </ScrollReveal>
+            <Projects onShowMore={handleShowMore} />
+            {showOtherProjects && (
+              <ScrollReveal width="100%">
+                <OtherProjects onHide={handleHide} />
+              </ScrollReveal>
+            )}
+            </div>
         </div>
-      </div>
+            <ScrollReveal width="100%">
+        <Footer />
+      </ScrollReveal>
+      </main>
     </div>
   );
 }

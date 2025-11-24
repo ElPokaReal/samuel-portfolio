@@ -65,6 +65,10 @@ export interface Translations {
     heart: string;
     and: string;
     coffee: string;
+    title: string;
+    description: string;
+    madeWith: string;
+    rights: string;
   };
 }
 
@@ -194,10 +198,14 @@ export const translations: Record<Language, Translations> = {
       cta: 'Contactar Ahora',
     },
     footer: {
-      builtBy: 'Diseñado y Desarrollado por Samuel Aranguren con',
+      builtBy: 'Diseñado y Desarrollado por',
       heart: '❤️',
       and: 'y',
       coffee: '☕',
+      title: 'TRABAJEMOS JUNTOS',
+      description: '¿Tienes un proyecto en mente? Construyamos algo increíble.',
+      madeWith: 'Hecho con',
+      rights: 'Todos los derechos reservados.',
     },
   },
   en: {
@@ -325,10 +333,14 @@ export const translations: Record<Language, Translations> = {
       cta: 'Contact Now',
     },
     footer: {
-      builtBy: 'Designed & Developed by Samuel Aranguren with',
+      builtBy: 'Designed & Developed by',
       heart: '❤️',
       and: 'and',
       coffee: '☕',
+      title: 'LET\'S WORK TOGETHER',
+      description: 'Have a project in mind? Let\'s build something awesome.',
+      madeWith: 'Made with',
+      rights: 'All rights reserved.',
     },
   },
 };
