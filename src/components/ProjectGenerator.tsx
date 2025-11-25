@@ -6,14 +6,14 @@ import { translations } from '../i18n/translations';
 import { projectData } from '../data/projectLinks';
 
 export const ProjectGenerator = () => {
-  const [apiKey, setApiKey] = useState('');
+  const [apiKey, setApiKey] = useState(import.meta.env.VITE_GEMINI_API_KEY || '');
   const [titleEs, setTitleEs] = useState('');
   const [descriptionEs, setDescriptionEs] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [technologies, setTechnologies] = useState('');
   const [liveUrl, setLiveUrl] = useState('');
   const [githubUrl, setGithubUrl] = useState('');
-  
+
   const [isGenerating, setIsGenerating] = useState(false);
   const [isMigrating, setIsMigrating] = useState(false);
   const [migrationStatus, setMigrationStatus] = useState('');
@@ -31,7 +31,7 @@ export const ProjectGenerator = () => {
       const itemsToMigrate = translations.es.projects.items.map((item, index) => {
         const data = projectData[index];
         const enItem = translations.en.projects.items[index];
-        
+
         if (!data || !enItem) return null;
 
         return {
@@ -50,7 +50,7 @@ export const ProjectGenerator = () => {
 
       // Add other items if possible (assuming they match index 4 onwards in projectData if it existed)
       // For now, let's just migrate the main items that have full data
-      
+
       let count = 0;
       for (const project of itemsToMigrate) {
         if (project) {
@@ -82,7 +82,7 @@ export const ProjectGenerator = () => {
     try {
       // 1. Translate with Gemini
       const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+      const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' });
 
       const prompt = `
         Actúa como un traductor profesional técnico.
@@ -124,7 +124,7 @@ export const ProjectGenerator = () => {
 
       setGeneratedCode(JSON.stringify(savedProject, null, 2));
       setMigrationStatus('¡Proyecto creado exitosamente en la base de datos!');
-      
+
       // Clear form
       setTitleEs('');
       setDescriptionEs('');
@@ -168,11 +168,12 @@ export const ProjectGenerator = () => {
                 type="password"
                 value={apiKey}
                 onChange={(e) => setApiKey(e.target.value)}
-                placeholder="Pegar API Key aquí..."
+                placeholder="Pegar API Key aquí (o configura VITE_GEMINI_API_KEY)"
                 className="w-full p-3 border-2 border-black rounded-lg focus:outline-none focus:shadow-[4px_4px_0px_0px_#000] transition-all"
               />
               <p className="text-xs text-slate-gray">
-                Obtén tu key en <a href="https://aistudio.google.com/" target="_blank" className="underline hover:text-primary">Google AI Studio</a>
+                Obtén tu key en <a href="https://aistudio.google.com/" target="_blank" className="underline hover:text-primary">Google AI Studio</a>.
+                {!apiKey && <span className="text-red-500 ml-2 font-bold">No se detectó VITE_GEMINI_API_KEY en .env</span>}
               </p>
             </div>
 
@@ -307,7 +308,7 @@ export const ProjectGenerator = () => {
                   {copied ? <Check size={20} className="text-green-600" /> : <Copy size={20} />}
                 </button>
               </div>
-              
+
               <div className="flex-1 bg-gray-900 rounded-xl p-4 overflow-auto font-mono text-sm text-green-400">
                 {generatedCode ? (
                   <pre className="whitespace-pre-wrap">{generatedCode}</pre>
@@ -317,7 +318,7 @@ export const ProjectGenerator = () => {
                   </div>
                 )}
               </div>
-              
+
               <div className="mt-4 text-xs text-slate-gray text-center">
                 El proyecto se guardará directamente en Supabase.
               </div>

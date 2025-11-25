@@ -14,14 +14,38 @@ const Projects = lazy(() => import('./components/Projects'));
 const ProjectGallery = lazy(() => import('./components/ProjectGallery'));
 
 import { ProjectGenerator } from './components/ProjectGenerator';
+import { Login } from './components/Login';
+import { supabase } from './lib/supabase';
+import type { Session } from '@supabase/supabase-js';
 
 function App() {
   useSEO();
   const [showGallery, setShowGallery] = useState(false);
 
+  const [session, setSession] = useState<Session | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setLoading(false);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
   // Simple client-side routing for the generator
   if (window.location.pathname === '/admin') {
-    return <ProjectGenerator />;
+    if (loading) {
+      return <div className="min-h-screen flex items-center justify-center">Cargando...</div>;
+    }
+    return session ? <ProjectGenerator /> : <Login />;
   }
 
   return (
@@ -30,7 +54,7 @@ function App() {
         <Header />
         <main className="flex-1 w-full">
           <Hero />
-          
+
           <div className="layout-container flex flex-col items-center">
             <div className="px-4 md:px-10 lg:px-20 xl:px-40 w-full max-w-[1200px]">
               <ScrollReveal width="100%">
@@ -41,11 +65,11 @@ function App() {
               </ScrollReveal>
             </div>
           </div>
-          
+
           <LoadOnView>
             <Projects onShowMore={() => setShowGallery(true)} />
           </LoadOnView>
-          
+
           <Suspense fallback={null}>
             {showGallery && <ProjectGallery isOpen={showGallery} onClose={() => setShowGallery(false)} />}
           </Suspense>
