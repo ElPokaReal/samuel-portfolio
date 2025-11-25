@@ -2,6 +2,7 @@
 <html lang="es" class="dark">
 
 <head>
+  <meta charset="UTF-8" />
   <!-- Google Tag Manager -->
   <script>
     // Defer GTM loading
@@ -15,16 +16,28 @@
 
       // Only insert the script after interaction or timeout
       var loaded = false;
+      function loadGTM() {
+        if (loaded) return;
+        loaded = true;
+        f.parentNode.insertBefore(j, f);
+      }
+
+      window.addEventListener('scroll', loadGTM, { once: true });
+      window.addEventListener('mousemove', loadGTM, { once: true });
+      window.addEventListener('touchstart', loadGTM, { once: true });
+      setTimeout(loadGTM, 4000);
+    })(window, document, 'script', 'dataLayer', 'GTM-N45Z5FF7');
+  </script>
   <meta name="description" content="Portfolio de Samuel - Desarrollador Web" />
   <title>Portfolio de Samuel | Desarrollador Web</title>
   <!-- Preload critical image -->
   <link rel="preload" as="image" href="/profile.webp" fetchpriority="high" />
-  <!--Preload fonts-- >
+  <!-- Preload fonts -->
   <link rel="preload" href="/fonts/Poppins-Regular.ttf" as="font" type="font/ttf" crossorigin />
   <link rel="preload" href="/fonts/Poppins-Medium.ttf" as="font" type="font/ttf" crossorigin />
   <link rel="preload" href="/fonts/Poppins-Bold.ttf" as="font" type="font/ttf" crossorigin />
   <link rel="preload" href="/fonts/SpaceGrotesk-Bold.ttf" as="font" type="font/ttf" crossorigin />
-  <!--Open Graph / Facebook-- >
+  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://samuelaranguren.online/" />
   <meta property="og:title" content="Portfolio de Samuel | Desarrollador Web" />
@@ -32,7 +45,7 @@
     content="Portfolio de Samuel Aranguren - Desarrollador Web especializado en NextJS y tecnologías modernas" />
   <meta property="og:image" content="https://samuelaranguren.online/profile.webp" />
 
-  <!--Twitter -->
+  <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
   <meta property="twitter:url" content="https://samuelaranguren.online/" />
   <meta property="twitter:title" content="Portfolio de Samuel | Desarrollador Web" />
@@ -40,27 +53,27 @@
     content="Portfolio de Samuel Aranguren - Desarrollador Web especializado en NextJS y tecnologías modernas" />
   <meta property="twitter:image" content="https://samuelaranguren.online/profile.webp" />
 
-  <!--Canonical -->
+  <!-- Canonical -->
   <link rel="canonical" href="https://samuelaranguren.online/" />
 
-  <!--Structured Data(JSON - LD)-- >
-        <script type="application/ld+json">
-          {
-            "@context": "https://schema.org",
-          "@type": "Person",
-          "name": "Samuel Aranguren",
-          "url": "https://samuelaranguren.online/",
-          "image": "https://samuelaranguren.online/profile.webp",
-          "sameAs": [
-          "https://github.com/ElPokaReal/",
-          "https://www.linkedin.com/in/samuel-aranguren-4447b31b4"
-          ],
-          "jobTitle": "Desarrollador Web Full Stack Next.js",
-          "worksFor": {
-            "@type": "Organization",
-          "name": "Tu Conexión Infinita"
-        }
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Samuel Aranguren",
+      "url": "https://samuelaranguren.online/",
+      "image": "https://samuelaranguren.online/profile.webp",
+      "sameAs": [
+        "https://github.com/ElPokaReal/",
+        "https://www.linkedin.com/in/samuel-aranguren-4447b31b4"
+      ],
+      "jobTitle": "Desarrollador Web Full Stack Next.js",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Tu Conexión Infinita"
       }
+    }
   </script>
 </head>
 
