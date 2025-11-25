@@ -37,6 +37,7 @@ const ProjectGallery = lazy(() => lazyRetry(() => import('./components/ProjectGa
 
 import { ProjectGenerator } from './components/ProjectGenerator';
 import { Login } from './components/Login';
+import { NotFound } from './components/NotFound';
 import { supabase } from './lib/supabase';
 import type { Session } from '@supabase/supabase-js';
 
@@ -62,12 +63,19 @@ function App() {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Simple client-side routing for the generator
-  if (window.location.pathname === '/admin') {
+  // Simple client-side routing
+  const path = window.location.pathname;
+
+  if (path === '/admin') {
     if (loading) {
       return <div className="min-h-screen flex items-center justify-center">Cargando...</div>;
     }
     return session ? <ProjectGenerator /> : <Login />;
+  }
+
+  // If path is not root and not admin, show 404
+  if (path !== '/' && path !== '/index.html') {
+    return <NotFound />;
   }
 
   return (
