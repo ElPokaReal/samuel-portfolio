@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { X, Github, ExternalLink, Filter } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { X, Github, ExternalLink, Filter, Loader2 } from 'lucide-react';
 import { m, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
-import { projectData } from '../data/projectLinks';
+import type { Project } from '../services/projectService';
+import { projectService } from '../services/projectService';
 
 interface ProjectGalleryProps {
   isOpen: boolean;
@@ -10,17 +11,45 @@ interface ProjectGalleryProps {
 }
 
 const ProjectGallery = ({ isOpen, onClose }: ProjectGalleryProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [filter, setFilter] = useState('All');
 
   // Combine translations with data
-  const allProjects = t.projects.items.map((p, i) => ({ ...p, ...projectData[i] }));
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const data = await projectService.getProjects();
+        setProjects(data);
+      } catch (error) {
+        console.error('Failed to fetch projects', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (isOpen) {
+      fetchProjects();
+    }
+  }, [isOpen]);
+
+  // Helper to get localized content
+  const getProjectContent = (project: Project) => ({
+    title: language === 'es' ? project.title_es : project.title_en,
+    description: language === 'es' ? project.description_es : project.description_en,
+    technologies: project.technologies,
+    image: project.image_url,
+    live: project.live_url,
+    github: project.github_url
+  });
   
   const categories = ['All', 'React', 'Next.js', 'TypeScript', 'Tailwind'];
 
   const filteredProjects = filter === 'All' 
-    ? allProjects 
-    : allProjects.filter(p => p.technologies.some(tech => tech.includes(filter)));
+    ? projects 
+    : projects.filter(p => p.technologies.some(tech => tech.includes(filter)));
 
   return (
     <AnimatePresence>
@@ -81,9 +110,16 @@ const ProjectGallery = ({ isOpen, onClose }: ProjectGalleryProps) => {
             {/* Grid */}
             <div className="flex-1 overflow-y-auto p-6 md:p-8 bg-gray-50">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProjects.map((project, index) => (
+                {loading ? (
+                  <div className="col-span-full h-64 flex items-center justify-center">
+                    <Loader2 className="animate-spin w-12 h-12 text-black" />
+                  </div>
+                ) : (
+                  filteredProjects.map((project, index) => {
+                    const content = getProjectContent(project);
+                    return (
                   <m.div
-                    key={index}
+                    key={project.id || index}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     // Limit stagger to first 6 items to prevent massive cascade lag
@@ -95,8 +131,8 @@ const ProjectGallery = ({ isOpen, onClose }: ProjectGalleryProps) => {
                   >
                     <div className="relative h-48 overflow-hidden border-b-[3px] border-black">
                       <img 
-                        src={project.image} 
-                        alt={project.title}
+                        src={content.image} 
+                        alt={content.title}
                         loading="lazy"
                         decoding="async"
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
@@ -105,28 +141,28 @@ const ProjectGallery = ({ isOpen, onClose }: ProjectGalleryProps) => {
                     </div>
                     
                     <div className="p-5 flex flex-col flex-1">
-                      <h3 className="text-xl font-black text-black mb-2">{project.title}</h3>
+                      <h3 className="text-xl font-black text-black mb-2">{content.title}</h3>
                       <p className="text-sm text-gray-600 mb-4 line-clamp-3 flex-1">
-                        {project.description}
+                        {content.description}
                       </p>
                       
                       <div className="flex flex-wrap gap-2 mb-4">
-                        {project.technologies.slice(0, 3).map((tech, i) => (
+                        {content.technologies.slice(0, 3).map((tech, i) => (
                           <span key={i} className="text-xs font-bold font-mono bg-secondary/30 px-2 py-1 rounded border border-black">
                             {tech}
                           </span>
                         ))}
-                        {project.technologies.length > 3 && (
+                        {content.technologies.length > 3 && (
                           <span className="text-xs font-bold font-mono text-gray-500 px-1 py-1">
-                            +{project.technologies.length - 3}
+                            +{content.technologies.length - 3}
                           </span>
                         )}
                       </div>
 
                       <div className="flex gap-3 mt-auto pt-4 border-t-2 border-black/5">
-                        {project.github && (
+                        {content.github && (
                           <a 
-                            href={project.github}
+                            href={content.github}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex-1 flex items-center justify-center gap-2 py-2 bg-white border-2 border-black rounded-lg font-bold text-sm hover:bg-black hover:text-white transition-colors"
@@ -135,9 +171,9 @@ const ProjectGallery = ({ isOpen, onClose }: ProjectGalleryProps) => {
                             Code
                           </a>
                         )}
-                        {project.live && (
+                        {content.live && (
                           <a 
-                            href={project.live}
+                            href={content.live}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex-1 flex items-center justify-center gap-2 py-2 bg-primary border-2 border-black rounded-lg font-bold text-sm hover:bg-white transition-colors"
@@ -149,7 +185,9 @@ const ProjectGallery = ({ isOpen, onClose }: ProjectGalleryProps) => {
                       </div>
                     </div>
                   </m.div>
-                ))}
+                    );
+                  })
+                )}
               </div>
             </div>
           </m.div>

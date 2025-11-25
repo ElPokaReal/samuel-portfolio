@@ -13,11 +13,16 @@ import { ScrollReveal } from './components/ScrollReveal';
 const Projects = lazy(() => import('./components/Projects'));
 const ProjectGallery = lazy(() => import('./components/ProjectGallery'));
 
+import { ProjectGenerator } from './components/ProjectGenerator';
+
 function App() {
   useSEO();
   const [showGallery, setShowGallery] = useState(false);
 
-
+  // Simple client-side routing for the generator
+  if (window.location.pathname === '/admin') {
+    return <ProjectGenerator />;
+  }
 
   return (
     <LazyMotion features={domAnimation}>

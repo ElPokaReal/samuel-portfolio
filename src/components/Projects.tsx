@@ -1,7 +1,8 @@
 import { useRef, useState, useEffect } from 'react';
-import { Github, ExternalLink, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Github, ExternalLink, ArrowRight, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
-import { projectData } from '../data/projectLinks';
+import { projectService } from '../services/projectService';
+import type { Project } from '../services/projectService';
 import { ScrollReveal } from './ScrollReveal';
 import { m } from 'framer-motion';
 
@@ -10,15 +11,38 @@ interface ProjectsProps {
 }
 
 const Projects = ({ onShowMore }: ProjectsProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showLeftBtn, setShowLeftBtn] = useState(false);
   const [showRightBtn, setShowRightBtn] = useState(true);
   
-  const projects = t.projects.items.map((project, index) => ({
-    ...project,
-    ...projectData[index],
-  }));
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const data = await projectService.getProjects();
+        setProjects(data);
+      } catch (error) {
+        console.error('Failed to fetch projects', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  // Helper to get localized content
+  const getProjectContent = (project: Project) => ({
+    title: language === 'es' ? project.title_es : project.title_en,
+    description: language === 'es' ? project.description_es : project.description_en,
+    technologies: project.technologies,
+    image: project.image_url,
+    live: project.live_url,
+    github: project.github_url
+  });
 
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -107,9 +131,17 @@ const Projects = ({ onShowMore }: ProjectsProps) => {
         >
           {/* Start Sentinel */}
           <div id="scroll-sentinel-start" className="min-w-px h-full opacity-0 pointer-events-none"></div>
-          {projects.map((project, index) => (
+          
+          {loading ? (
+             <div className="min-w-[85vw] md:min-w-[380px] h-[400px] flex items-center justify-center">
+               <Loader2 className="animate-spin w-12 h-12 text-black" />
+             </div>
+          ) : (
+            projects.map((project, index) => {
+              const content = getProjectContent(project);
+              return (
             <m.div 
-              key={index}
+              key={project.id || index}
               className="min-w-[85vw] md:min-w-[380px] lg:min-w-[420px] snap-center"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -127,15 +159,15 @@ const Projects = ({ onShowMore }: ProjectsProps) => {
                     <div className="w-3 h-3 rounded-full bg-[#28c840] border border-white/20"></div>
                   </div>
                   <div className="flex-1 bg-gray-800 rounded-md px-3 py-1 text-[10px] md:text-xs font-mono text-gray-200 truncate">
-                    {project.live ? new URL(project.live).hostname : 'localhost:3000'}
+                    {content.live ? new URL(content.live).hostname : 'localhost:3000'}
                   </div>
                 </div>
 
                 {/* Project Image Area */}
                 <div className="relative aspect-video border-b-4 border-black group overflow-hidden bg-gray-100">
                   <img 
-                    src={project.image} 
-                    alt={project.title}
+                    src={content.image} 
+                    alt={content.title}
                     loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     width="1920"
@@ -144,9 +176,9 @@ const Projects = ({ onShowMore }: ProjectsProps) => {
                   
                   {/* Overlay Actions */}
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 backdrop-blur-sm">
-                    {project.live && (
+                    {content.live && (
                       <a 
-                        href={project.live}
+                        href={content.live}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-3 bg-[#28c840] border-[3px] border-black rounded-full text-black hover:scale-110 transition-transform shadow-[4px_4px_0px_0px_#000]"
@@ -155,9 +187,9 @@ const Projects = ({ onShowMore }: ProjectsProps) => {
                         <ExternalLink size={24} strokeWidth={3} />
                       </a>
                     )}
-                    {project.github && (
+                    {content.github && (
                       <a 
-                        href={project.github}
+                        href={content.github}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-3 bg-white border-[3px] border-black rounded-full text-black hover:scale-110 transition-transform shadow-[4px_4px_0px_0px_#000]"
@@ -172,21 +204,23 @@ const Projects = ({ onShowMore }: ProjectsProps) => {
                 {/* Content Area */}
                 <div className="p-6 flex flex-col flex-1 bg-white relative">
                   {/* Floating Badge */}
-                  <div className="absolute -top-5 right-6 bg-[#febc2e] px-4 py-1 border-[3px] border-black rounded-lg shadow-[4px_4px_0px_0px_#000] transform rotate-2 text-black">
-                    <span className="font-black text-xs uppercase tracking-wider">Featured</span>
-                  </div>
+                  {project.featured && (
+                    <div className="absolute -top-5 right-6 bg-[#febc2e] px-4 py-1 border-[3px] border-black rounded-lg shadow-[4px_4px_0px_0px_#000] transform rotate-2 text-black">
+                      <span className="font-black text-xs uppercase tracking-wider">Featured</span>
+                    </div>
+                  )}
 
                   <h3 className="text-2xl font-black font-family-display mb-3 leading-tight">
-                    {project.title}
+                    {content.title}
                   </h3>
                   
                   <p className="text-black font-medium text-sm mb-6 line-clamp-3">
-                    {project.description}
+                    {content.description}
                   </p>
 
                   <div className="mt-auto">
                     <div className="flex flex-wrap gap-2">
-                      {project.technologies.slice(0, 4).map((tech, i) => (
+                      {content.technologies.slice(0, 4).map((tech, i) => (
                         <span 
                           key={i} 
                           className="px-2 py-1 bg-gray-100 border-2 border-black rounded-md text-xs font-bold font-mono transform hover:-rotate-2 transition-transform cursor-default"
@@ -199,7 +233,9 @@ const Projects = ({ onShowMore }: ProjectsProps) => {
                 </div>
               </div>
             </m.div>
-          ))}
+              );
+            })
+          )}
           
           {/* "View More" Card at the end */}
           <div className="min-w-[200px] md:min-w-[300px] snap-center flex items-center justify-center">
