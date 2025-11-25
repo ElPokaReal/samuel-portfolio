@@ -7,9 +7,9 @@ const Experience = () => {
   return (
     <section className="py-20 md:py-24" id="experience">
       <div className="px-4">
-        <h2 className="flex items-center gap-4 text-2xl font-bold leading-tight tracking-[-0.015em] font-[family-name:var(--font-family-display)] text-text-light dark:text-text-dark mb-10">
-          <span className="text-primary text-shadow-cartoon drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]">02.</span>{t.experience.title}
-          <span className="flex-grow h-px bg-slate-gray/30"></span>
+        <h2 className="flex items-center gap-4 text-3xl md:text-4xl font-black leading-tight tracking-[-0.015em] font-[family-name:var(--font-family-display)] text-black mb-16 px-4">
+          <span className="bg-primary px-2 cartoon-border cartoon-shadow transform -rotate-2">02.</span>
+          {t.experience.title}
         </h2>
 
         <div className="max-w-3xl space-y-8">

@@ -70,6 +70,17 @@ export interface Translations {
     madeWith: string;
     rights: string;
   };
+  otherProjects: {
+    title: string;
+    description: string;
+    hide: string;
+    building: string;
+  };
+  projectGallery: {
+    title: string;
+    filterBy: string;
+    all: string;
+  };
 }
 
 export const translations: Record<Language, Translations> = {
@@ -207,6 +218,17 @@ export const translations: Record<Language, Translations> = {
       madeWith: 'Hecho con',
       rights: 'Todos los derechos reservados.',
     },
+    otherProjects: {
+      title: 'MÁS PROYECTOS',
+      description: 'Cocinando nuevas ideas en el laboratorio...',
+      hide: 'Ocultar',
+      building: 'Construyendo algo increíble',
+    },
+    projectGallery: {
+      title: 'Galería de Proyectos',
+      filterBy: 'Filtrar por',
+      all: 'Todos',
+    },
   },
   en: {
     meta: {
@@ -341,6 +363,17 @@ export const translations: Record<Language, Translations> = {
       description: 'Have a project in mind? Let\'s build something awesome.',
       madeWith: 'Made with',
       rights: 'All rights reserved.',
+    },
+    otherProjects: {
+      title: 'MORE PROJECTS',
+      description: 'Cooking up new ideas in the lab...',
+      hide: 'Hide',
+      building: 'Building something awesome',
+    },
+    projectGallery: {
+      title: 'Project Gallery',
+      filterBy: 'Filter by',
+      all: 'All',
     },
   },
 };
