@@ -34,12 +34,7 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 z-20 relative">
         <div className="flex flex-col gap-6 max-w-4xl">
-          <m.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex flex-col gap-4 text-left"
-          >
+          <div className="flex flex-col gap-4 text-left animate-fade-in-up">
             <h1 className="text-black text-xl md:text-2xl font-bold font-[family-name:var(--font-family-display)] tracking-wide bg-primary w-fit px-2 cartoon-border cartoon-shadow transform -rotate-1">
               {t.hero.greeting}
             </h1>
@@ -52,14 +47,9 @@ const Hero = () => {
             <p className="text-black text-lg md:text-xl font-medium leading-relaxed max-w-2xl mt-6 border-l-4 border-black pl-4">
               {t.hero.description}
             </p>
-          </m.div>
+          </div>
           
-          <m.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-10"
-          >
+          <div className="mt-10 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
             <a
               className="group relative inline-flex h-16 items-center justify-center overflow-hidden bg-primary px-10 font-bold text-black transition-all duration-300 cartoon-border cartoon-shadow cartoon-shadow-hover"
               href="#contact"
@@ -67,7 +57,7 @@ const Hero = () => {
               <span className="mr-2 text-xl">{t.hero.cta}</span>
               <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
             </a>
-          </m.div>
+          </div>
         </div>
       </div>
 

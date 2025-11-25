@@ -42,7 +42,7 @@ function App() {
           </LoadOnView>
           
           <Suspense fallback={null}>
-            <ProjectGallery isOpen={showGallery} onClose={() => setShowGallery(false)} />
+            {showGallery && <ProjectGallery isOpen={showGallery} onClose={() => setShowGallery(false)} />}
           </Suspense>
 
           <ScrollReveal width="100%">
