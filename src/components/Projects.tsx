@@ -3,7 +3,7 @@ import { Github, ExternalLink, ArrowRight, ChevronLeft, ChevronRight } from 'luc
 import { useLanguage } from '../contexts/LanguageContext';
 import { projectData } from '../data/projectLinks';
 import { ScrollReveal } from './ScrollReveal';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 interface ProjectsProps {
   onShowMore: () => void;
@@ -20,28 +20,34 @@ const Projects = ({ onShowMore }: ProjectsProps) => {
     ...projectData[index],
   }));
 
-  const checkScroll = () => {
-    if (scrollContainerRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      setShowLeftBtn(scrollLeft > 0);
-      setShowRightBtn(scrollLeft < scrollWidth - clientWidth - 10); // 10px buffer
-    }
-  };
-
   useEffect(() => {
     const container = scrollContainerRef.current;
-    if (container) {
-      container.addEventListener('scroll', checkScroll);
-      // Check initial state
-      checkScroll();
-      window.addEventListener('resize', checkScroll);
-    }
-    return () => {
-      if (container) {
-        container.removeEventListener('scroll', checkScroll);
+    const startSentinel = document.getElementById('scroll-sentinel-start');
+    const endSentinel = document.getElementById('scroll-sentinel-end');
+
+    if (!container || !startSentinel || !endSentinel) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target.id === 'scroll-sentinel-start') {
+            setShowLeftBtn(!entry.isIntersecting);
+          }
+          if (entry.target.id === 'scroll-sentinel-end') {
+            setShowRightBtn(!entry.isIntersecting);
+          }
+        });
+      },
+      {
+        root: container,
+        threshold: 0.1, // Trigger as soon as 10% of sentinel is visible
       }
-      window.removeEventListener('resize', checkScroll);
-    };
+    );
+
+    observer.observe(startSentinel);
+    observer.observe(endSentinel);
+
+    return () => observer.disconnect();
   }, []);
 
   const scroll = (direction: 'left' | 'right') => {
@@ -99,8 +105,10 @@ const Projects = ({ onShowMore }: ProjectsProps) => {
           className="flex overflow-x-auto gap-8 pb-12 snap-x snap-mandatory hide-scrollbar px-2 md:px-16"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
+          {/* Start Sentinel */}
+          <div id="scroll-sentinel-start" className="min-w-px h-full opacity-0 pointer-events-none"></div>
           {projects.map((project, index) => (
-            <motion.div 
+            <m.div 
               key={index}
               className="min-w-[85vw] md:min-w-[380px] lg:min-w-[420px] snap-center"
               initial={{ opacity: 0, y: 50 }}
@@ -118,7 +126,7 @@ const Projects = ({ onShowMore }: ProjectsProps) => {
                     <div className="w-3 h-3 rounded-full bg-[#febc2e] border border-white/20"></div>
                     <div className="w-3 h-3 rounded-full bg-[#28c840] border border-white/20"></div>
                   </div>
-                  <div className="flex-1 bg-gray-800 rounded-md px-3 py-1 text-[10px] md:text-xs font-mono text-gray-400 truncate">
+                  <div className="flex-1 bg-gray-800 rounded-md px-3 py-1 text-[10px] md:text-xs font-mono text-gray-200 truncate">
                     {project.live ? new URL(project.live).hostname : 'localhost:3000'}
                   </div>
                 </div>
@@ -190,7 +198,7 @@ const Projects = ({ onShowMore }: ProjectsProps) => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           ))}
           
           {/* "View More" Card at the end */}
@@ -207,11 +215,14 @@ const Projects = ({ onShowMore }: ProjectsProps) => {
               </span>
             </button>
           </div>
+          
+          {/* End Sentinel */}
+          <div id="scroll-sentinel-end" className="min-w-px h-full opacity-0 pointer-events-none"></div>
         </div>
 
         {/* Mobile Hint */}
-        <div className="md:hidden text-center mt-4 text-sm font-bold text-slate-gray animate-pulse">
-          ← Swipe to explore →
+        <div className="md:hidden text-center mt-4 text-sm font-bold text-black">
+          {t.projects.swipeToExplore}
         </div>
 
       </div>

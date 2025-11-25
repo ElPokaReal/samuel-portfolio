@@ -1,4 +1,4 @@
-import { motion, useInView, useAnimation, type Variant } from 'framer-motion';
+import { m, useInView, useAnimation, type Variant } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
 interface ScrollRevealProps {
@@ -45,14 +45,14 @@ export const ScrollReveal = ({
 
   return (
     <div ref={ref} style={{ position: "relative", width, overflow }} className={className}>
-      <motion.div
+      <m.div
         variants={variants[variant]}
         initial="hidden"
         animate={mainControls}
         transition={{ duration: 0.5, delay: delay }}
       >
         {children}
-      </motion.div>
+      </m.div>
     </div>
   );
 };

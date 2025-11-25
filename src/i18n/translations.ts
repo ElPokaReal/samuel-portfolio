@@ -53,6 +53,7 @@ export interface Translations {
     showMore: string;
     showLess: string;
     hideProjects: string;
+    swipeToExplore: string;
   };
   contact: {
     subtitle: string;
@@ -200,6 +201,7 @@ export const translations: Record<Language, Translations> = {
       showMore: 'Cargar más proyectos',
       showLess: 'Mostrar menos',
       hideProjects: 'Ocultar lista',
+      swipeToExplore: '← Desliza para explorar →',
     },
     contact: {
       subtitle: '04. ¿Qué sigue?',
@@ -346,6 +348,7 @@ export const translations: Record<Language, Translations> = {
       showMore: 'Load More Projects',
       showLess: 'Show Less',
       hideProjects: 'Hide List',
+      swipeToExplore: '← Swipe to explore →',
     },
     contact: {
       subtitle: '04. What\'s Next?',

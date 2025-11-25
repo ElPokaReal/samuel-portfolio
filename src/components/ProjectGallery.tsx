@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { X, Github, ExternalLink, Filter } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 import { projectData } from '../data/projectLinks';
 
@@ -25,7 +25,7 @@ const ProjectGallery = ({ isOpen, onClose }: ProjectGalleryProps) => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <motion.div 
+        <m.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -38,7 +38,7 @@ const ProjectGallery = ({ isOpen, onClose }: ProjectGalleryProps) => {
           />
 
           {/* Modal Container */}
-          <motion.div 
+          <m.div 
             initial={{ scale: 0.9, y: 20 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.9, y: 20 }}
@@ -46,7 +46,7 @@ const ProjectGallery = ({ isOpen, onClose }: ProjectGalleryProps) => {
           >
             {/* Header */}
             <div className="flex items-center justify-between p-6 border-b-[3px] border-black bg-primary">
-              <h2 className="text-2xl md:text-3xl font-black text-black font-[family-name:var(--font-family-display)] text-shadow-cartoon">
+              <h2 className="text-2xl md:text-3xl font-black text-white drop-shadow-[0_0_4px_#000]">
                 {t.projectGallery.title}
               </h2>
               <button 
@@ -82,7 +82,7 @@ const ProjectGallery = ({ isOpen, onClose }: ProjectGalleryProps) => {
             <div className="flex-1 overflow-y-auto p-6 md:p-8 bg-gray-50">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredProjects.map((project, index) => (
-                  <motion.div
+                  <m.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -148,12 +148,12 @@ const ProjectGallery = ({ isOpen, onClose }: ProjectGalleryProps) => {
                         )}
                       </div>
                     </div>
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
             </div>
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       )}
     </AnimatePresence>
   );

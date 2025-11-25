@@ -1,7 +1,7 @@
 import { useLanguage } from '../contexts/LanguageContext';
 import { TypewriterEffect } from './TypewriterEffect';
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { m } from 'framer-motion';
 
 const Hero = () => {
   const { t } = useLanguage();
@@ -34,7 +34,7 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 z-20 relative">
         <div className="flex flex-col gap-6 max-w-4xl">
-          <motion.div 
+          <m.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -46,15 +46,15 @@ const Hero = () => {
             <h2 className="text-primary text-6xl sm:text-7xl md:text-8xl font-black leading-tight tracking-tighter font-[family-name:var(--font-family-display)] drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] stroke-black text-shadow-cartoon">
               {t.hero.name}
             </h2>
-            <h3 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-[-0.015em] font-[family-name:var(--font-family-display)] min-h-[1.2em] md:min-h-[1.5em]">
+            <h3 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-[-0.015em] font-[family-name:var(--font-family-display)] min-h-[2.5em] md:min-h-[1.5em]">
               <TypewriterEffect phrases={t.hero.typewriterPhrases} />
             </h3>
             <p className="text-black text-lg md:text-xl font-medium leading-relaxed max-w-2xl mt-6 border-l-4 border-black pl-4">
               {t.hero.description}
             </p>
-          </motion.div>
+          </m.div>
           
-          <motion.div 
+          <m.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -67,12 +67,12 @@ const Hero = () => {
               <span className="mr-2 text-xl">{t.hero.cta}</span>
               <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
             </a>
-          </motion.div>
+          </m.div>
         </div>
       </div>
 
       {/* Animated Arrow */}
-      <motion.button
+      <m.button
         initial={{ opacity: 0 }}
         animate={{ opacity: showArrow ? 1 : 0, y: showArrow ? 0 : 20 }}
         transition={{ duration: 0.5 }}
@@ -88,7 +88,7 @@ const Hero = () => {
             <div className="absolute top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-black rounded-full animate-bounce"></div>
           </div>
         </div>
-      </motion.button>
+      </m.button>
     </section>
   );
 };
