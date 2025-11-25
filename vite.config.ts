@@ -6,5 +6,16 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom'],
+          'framer-motion': ['framer-motion'],
+          'ui-vendor': ['lucide-react', 'clsx', 'tailwind-merge']
+        }
+      }
+    }
+  }
   // base: '/samuel-portfolio', // Commented out for Vercel deployment
 })
