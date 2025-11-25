@@ -130,6 +130,8 @@ const Projects = ({ onShowMore }: ProjectsProps) => {
                     alt={project.title}
                     loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    width="1920"
+                    height="1058"
                   />
                   
                   {/* Overlay Actions */}

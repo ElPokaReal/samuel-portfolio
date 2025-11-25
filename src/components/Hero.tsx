@@ -46,7 +46,7 @@ const Hero = () => {
             <h2 className="text-primary text-6xl sm:text-7xl md:text-8xl font-black leading-tight tracking-tighter font-[family-name:var(--font-family-display)] drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] stroke-black text-shadow-cartoon">
               {t.hero.name}
             </h2>
-            <h3 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-[-0.015em] font-[family-name:var(--font-family-display)]">
+            <h3 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-[-0.015em] font-[family-name:var(--font-family-display)] min-h-[1.2em] md:min-h-[1.5em]">
               <TypewriterEffect phrases={t.hero.typewriterPhrases} />
             </h3>
             <p className="text-black text-lg md:text-xl font-medium leading-relaxed max-w-2xl mt-6 border-l-4 border-black pl-4">
