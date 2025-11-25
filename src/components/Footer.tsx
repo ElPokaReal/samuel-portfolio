@@ -54,7 +54,7 @@ const Footer = () => {
               <Star size={32} fill="currentColor" />
             </motion.div>
 
-            <h2 className="text-4xl md:text-6xl font-black text-white mb-6 font-family-display text-stroke-3 text-shadow-cartoon relative z-10">
+            <h2 className="text-3xl md:text-6xl font-black text-white mb-6 font-family-display text-stroke-3 text-shadow-cartoon relative z-10">
               {t.footer.title}
             </h2>
             <p className="text-black font-bold text-lg md:text-xl max-w-lg mx-auto mb-10">
@@ -63,7 +63,7 @@ const Footer = () => {
             
             <button 
               onClick={handleCopyEmail}
-              className="group relative inline-flex items-center gap-3 px-8 py-4 bg-black text-white font-black text-xl rounded-full border-2 border-black hover:bg-white hover:text-black hover:shadow-[6px_6px_0px_0px_#000] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+              className="group relative inline-flex items-center gap-3 px-8 py-4 bg-black text-white font-black text-md md:text-xl rounded-full border-2 border-black hover:bg-white hover:text-black hover:shadow-[6px_6px_0px_0px_#000] hover:-translate-y-1 transition-all duration-300 cursor-pointer"
             >
               {copied ? <Check size={24} className="text-green-500" /> : <Mail size={24} />}
               <span>samuaranguren@gmail.com</span>
