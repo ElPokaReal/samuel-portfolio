@@ -92,7 +92,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-6 px-4 pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-end md:justify-center pt-6 px-4 pointer-events-none">
       {/* Floating Command Center */}
       <motion.nav
         initial={{ y: -100, opacity: 0, scale: 0.8 }}
@@ -107,7 +107,7 @@ const Header = () => {
         {/* Logo / Home */}
         <a 
           href="/samuel-portfolio" 
-          className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-black text-primary rounded-full border-2 border-black hover:bg-primary hover:text-black transition-colors"
+          className="hidden md:flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-black text-primary rounded-full border-2 border-black hover:bg-primary hover:text-black transition-colors"
           aria-label="Home"
         >
           <Terminal size={20} className="md:w-6 md:h-6" />
@@ -138,7 +138,7 @@ const Header = () => {
 
         {/* Mobile Menu Toggle */}
         <div className="md:hidden flex items-center">
-           <span className="font-bold text-sm mr-2 font-[family-name:var(--font-family-display)]">MENU</span>
+           {/* Removed MENU text */}
         </div>
 
         {/* Actions Group */}
