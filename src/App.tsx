@@ -10,8 +10,30 @@ import Footer from './components/Footer';
 import { useSEO } from './hooks/useSEO';
 import { ScrollReveal } from './components/ScrollReveal';
 
-const Projects = lazy(() => import('./components/Projects'));
-const ProjectGallery = lazy(() => import('./components/ProjectGallery'));
+const lazyRetry = (componentImport: () => Promise<{ default: React.ComponentType<any> }>) => {
+  return new Promise<{ default: React.ComponentType<any> }>((resolve, reject) => {
+    componentImport()
+      .then((component) => {
+        resolve(component);
+      })
+      .catch((error) => {
+        console.error("Lazy load failed, reloading...", error);
+        // Check if we have already reloaded to avoid infinite loops
+        const hasReloaded = sessionStorage.getItem('lazy_retry_reload');
+        if (!hasReloaded) {
+          sessionStorage.setItem('lazy_retry_reload', 'true');
+          window.location.reload();
+        } else {
+          // If already reloaded, reject to show error boundary or fallback
+          sessionStorage.removeItem('lazy_retry_reload'); // Reset for next time
+          reject(error);
+        }
+      });
+  });
+};
+
+const Projects = lazy(() => lazyRetry(() => import('./components/Projects')));
+const ProjectGallery = lazy(() => lazyRetry(() => import('./components/ProjectGallery')));
 
 import { ProjectGenerator } from './components/ProjectGenerator';
 import { Login } from './components/Login';
