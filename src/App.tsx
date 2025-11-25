@@ -1,5 +1,5 @@
-import { useState, Suspense, lazy } from 'react';
-import { LazyMotion, domAnimation } from "framer-motion"
+import { useState, Suspense, lazy, useRef, useEffect } from 'react';
+import { LazyMotion, domAnimation, useInView } from "framer-motion"
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -37,9 +37,9 @@ function App() {
             </div>
           </div>
           
-          <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading Projects...</div>}>
+          <LoadOnView>
             <Projects onShowMore={() => setShowGallery(true)} />
-          </Suspense>
+          </LoadOnView>
           
           <Suspense fallback={null}>
             <ProjectGallery isOpen={showGallery} onClose={() => setShowGallery(false)} />
@@ -51,6 +51,28 @@ function App() {
         </main>
       </div>
     </LazyMotion>
+  );
+}
+
+function LoadOnView({ children }: { children: React.ReactNode }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "200px" });
+  const [shouldLoad, setShouldLoad] = useState(false);
+
+  useEffect(() => {
+    if (isInView) {
+      setShouldLoad(true);
+    }
+  }, [isInView]);
+
+  return (
+    <div ref={ref} className="min-h-[100px]">
+      {shouldLoad ? (
+        <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading Projects...</div>}>
+          {children}
+        </Suspense>
+      ) : null}
+    </div>
   );
 }
 
