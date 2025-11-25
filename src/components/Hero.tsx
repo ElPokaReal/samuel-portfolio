@@ -34,14 +34,14 @@ const Hero = () => {
 
       <div className="container mx-auto px-4 z-20 relative">
         <div className="flex flex-col gap-6 max-w-4xl">
-          <div className="flex flex-col gap-4 text-left animate-fade-in-up">
-            <h1 className="text-black text-xl md:text-2xl font-bold font-[family-name:var(--font-family-display)] tracking-wide bg-primary w-fit px-2 cartoon-border cartoon-shadow transform -rotate-1">
+          <div className="flex flex-col gap-4 text-left">
+            <h1 className="text-black text-xl md:text-2xl font-bold font-[family-name:var(--font-family-display)] tracking-wide bg-primary w-fit px-2 cartoon-border cartoon-shadow transform -rotate-1 animate-fade-in-up">
               {t.hero.greeting}
             </h1>
-            <h2 className="text-primary text-6xl sm:text-7xl md:text-8xl font-black leading-tight tracking-tighter font-[family-name:var(--font-family-display)] drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] stroke-black text-shadow-cartoon">
+            <h2 className="text-primary text-6xl sm:text-7xl md:text-8xl font-black leading-tight tracking-tighter font-[family-name:var(--font-family-display)] drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] stroke-black text-shadow-cartoon animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
               {t.hero.name}
             </h2>
-            <h3 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-[-0.015em] font-[family-name:var(--font-family-display)] min-h-[2.5em] md:min-h-[1.5em]">
+            <h3 className="text-black text-4xl sm:text-5xl md:text-6xl font-bold leading-tight tracking-[-0.015em] font-[family-name:var(--font-family-display)] min-h-[2.5em] md:min-h-[1.5em] animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
               <TypewriterEffect phrases={t.hero.typewriterPhrases} />
             </h3>
             <p className="text-black text-lg md:text-xl font-medium leading-relaxed max-w-2xl mt-6 border-l-4 border-black pl-4">
@@ -49,7 +49,7 @@ const Hero = () => {
             </p>
           </div>
           
-          <div className="mt-10 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <div className="mt-10 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
             <a
               className="group relative inline-flex h-16 items-center justify-center overflow-hidden bg-primary px-10 font-bold text-black transition-all duration-300 cartoon-border cartoon-shadow cartoon-shadow-hover"
               href="#contact"
