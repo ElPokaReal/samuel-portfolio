@@ -157,7 +157,7 @@ const Header = () => {
           {/* Language Toggle */}
           <button
             onClick={toggleLanguage}
-            className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center font-black text-xs md:text-sm bg-primary border-2 border-black rounded-full hover:shadow-[2px_2px_0px_0px_#000] hover:-translate-y-0.5 transition-all"
+            className="hidden md:flex w-10 h-10 md:w-12 md:h-12 items-center justify-center font-black text-xs md:text-sm bg-primary border-2 border-black rounded-full hover:shadow-[2px_2px_0px_0px_#000] hover:-translate-y-0.5 transition-all"
             aria-label={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
           >
             {language.toUpperCase()}
@@ -186,6 +186,16 @@ const Header = () => {
             className="absolute top-24 left-4 right-4 bg-white border-[3px] border-black shadow-[8px_8px_0px_0px_#000] rounded-2xl p-6 z-40 pointer-events-auto md:hidden"
           >
             <div className="flex flex-col gap-4">
+              {/* Mobile Language Toggle - Top Right */}
+              <div className="flex justify-end mb-2">
+                <button
+                  onClick={toggleLanguage}
+                  className="w-10 h-10 flex items-center justify-center font-black text-xs bg-primary border-2 border-black rounded-full hover:shadow-[2px_2px_0px_0px_#000] hover:-translate-y-0.5 transition-all"
+                  aria-label={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
+                >
+                  {language.toUpperCase()}
+                </button>
+              </div>
               {navItems.map((item) => (
                 <a
                   key={item.id}
