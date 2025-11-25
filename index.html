@@ -1,23 +1,66 @@
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://samuelaranguren.online/" />
-<meta property="og:title" content="Portfolio de Samuel | Desarrollador Web" />
-<meta property="og:description"
-  content="Portfolio de Samuel Aranguren - Desarrollador Web especializado en NextJS y tecnologías modernas" />
-<meta property="og:image" content="https://samuelaranguren.online/profile.webp" />
+<!doctype html>
+<html lang="es" class="dark">
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content="https://samuelaranguren.online/" />
-<meta property="twitter:title" content="Portfolio de Samuel | Desarrollador Web" />
-<meta property="twitter:description"
-  content="Portfolio de Samuel Aranguren - Desarrollador Web especializado en NextJS y tecnologías modernas" />
-<meta property="twitter:image" content="https://samuelaranguren.online/profile.webp" />
+<head>
+  <!-- Google Tag Manager -->
+  <script>
+    // Defer GTM loading
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
 
-<!-- Canonical -->
-<link rel="canonical" href="https://samuelaranguren.online/" />
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
 
-<!-- Structured Data (JSON-LD) -->
-<script type="application/ld+json">
+      // Only insert the script after interaction or timeout
+      var loaded = false;
+      function loadGTM() {
+        if (loaded) return;
+        loaded = true;
+        f.parentNode.insertBefore(j, f);
+      }
+
+      window.addEventListener('scroll', loadGTM, { once: true });
+      window.addEventListener('mousemove', loadGTM, { once: true });
+      window.addEventListener('touchstart', loadGTM, { once: true });
+      setTimeout(loadGTM, 4000); // Fallback
+    })(window, document, 'script', 'dataLayer', 'GTM-N45Z5FF7');
+  </script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio de Samuel - Desarrollador Web" />
+  <title>Portfolio de Samuel | Desarrollador Web</title>
+  <!-- Preload critical image -->
+  <link rel="preload" as="image" href="/profile.webp" fetchpriority="high" />
+  <!-- Preload fonts -->
+  <link rel="preload" href="/fonts/Poppins-Regular.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="/fonts/Poppins-Medium.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="/fonts/Poppins-Bold.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="/fonts/SpaceGrotesk-Bold.ttf" as="font" type="font/ttf" crossorigin />
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://samuelaranguren.online/" />
+  <meta property="og:title" content="Portfolio de Samuel | Desarrollador Web" />
+  <meta property="og:description"
+    content="Portfolio de Samuel Aranguren - Desarrollador Web especializado en NextJS y tecnologías modernas" />
+  <meta property="og:image" content="https://samuelaranguren.online/profile.webp" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://samuelaranguren.online/" />
+  <meta property="twitter:title" content="Portfolio de Samuel | Desarrollador Web" />
+  <meta property="twitter:description"
+    content="Portfolio de Samuel Aranguren - Desarrollador Web especializado en NextJS y tecnologías modernas" />
+  <meta property="twitter:image" content="https://samuelaranguren.online/profile.webp" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://samuelaranguren.online/" />
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Person",
