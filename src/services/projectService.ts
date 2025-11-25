@@ -46,6 +46,32 @@ export const projectService = {
     return data;
   },
 
+  async updateProject(id: string, project: Partial<Project>) {
+    const { data, error } = await supabase
+      .from('projects')
+      .update(project)
+      .eq('id', id)
+      .select()
+      .single();
+
+    if (error) {
+      throw error;
+    }
+
+    return data;
+  },
+
+  async deleteProject(id: string) {
+    const { error } = await supabase
+      .from('projects')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      throw error;
+    }
+  },
+
   async uploadImage(file: File) {
     const fileExt = file.name.split('.').pop();
     const fileName = `${Math.random()}.${fileExt}`;
