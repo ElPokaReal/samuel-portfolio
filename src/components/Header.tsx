@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, Terminal, Github, Linkedin, Languages, FileText } from 'lucide-react';
+import { Menu, X, Terminal, Github, Linkedin, FileText } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import { cn } from '../lib/utils';
@@ -8,7 +8,6 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [isHidden, setIsHidden] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const { language, setLanguage, t } = useLanguage();
   const { scrollY } = useScroll();
   const lastScrollY = useRef(0);
@@ -18,9 +17,6 @@ const Header = () => {
   };
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    // Determine if scrolled (for style changes if needed, though we use current scrollY for logic)
-    setIsScrolled(latest > 50);
-
     // Check if we are at the bottom of the page (Footer visible)
     const isAtBottom = window.innerHeight + latest >= document.documentElement.scrollHeight - 100;
 

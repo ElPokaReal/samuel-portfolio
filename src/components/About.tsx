@@ -28,7 +28,7 @@ const About = () => {
               <img
                 className="w-full h-full object-cover filter grayscale hover:filter-none transition-all duration-300"
                 alt="Samuel Aranguren - Desarrollador Web Full Stack en Venezuela"
-                src="/samuel-portfolio/profile.webp"
+                src="/profile.webp"
                 loading="eager"
                 fetchPriority="high"
                 decoding="async"
