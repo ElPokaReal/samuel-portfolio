@@ -1,5 +1,3 @@
 User-agent: *
-Allow: /
 Disallow: /admin
-Disallow: /cgi-bin/
 Sitemap: https://samuelaranguren.online/sitemap.xml
