@@ -1,4 +1,5 @@
-import { Github, ExternalLink, ArrowUpRight } from 'lucide-react';
+import { useRef, useState, useEffect } from 'react';
+import { Github, ExternalLink, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { projectData } from '../data/projectLinks';
 import { ScrollReveal } from './ScrollReveal';
@@ -10,128 +11,207 @@ interface ProjectsProps {
 
 const Projects = ({ onShowMore }: ProjectsProps) => {
   const { t } = useLanguage();
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [showLeftBtn, setShowLeftBtn] = useState(false);
+  const [showRightBtn, setShowRightBtn] = useState(true);
+  
   const projects = t.projects.items.map((project, index) => ({
     ...project,
     ...projectData[index],
   }));
 
+  const checkScroll = () => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setShowLeftBtn(scrollLeft > 0);
+      setShowRightBtn(scrollLeft < scrollWidth - clientWidth - 10); // 10px buffer
+    }
+  };
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', checkScroll);
+      // Check initial state
+      checkScroll();
+      window.addEventListener('resize', checkScroll);
+    }
+    return () => {
+      if (container) {
+        container.removeEventListener('scroll', checkScroll);
+      }
+      window.removeEventListener('resize', checkScroll);
+    };
+  }, []);
+
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = 500;
+      scrollContainerRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
-    <section className="py-24 md:py-32 bg-white" id="projects">
-      <ScrollReveal width="100%">
-        <h2 className="flex items-center gap-4 text-4xl md:text-6xl font-black leading-tight tracking-[-0.015em] font-[family-name:var(--font-family-display)] text-black mb-20 px-4 drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] stroke-black text-shadow-cartoon">
-          <span className="bg-primary px-4 py-1 cartoon-border cartoon-shadow transform -rotate-2 text-2xl md:text-4xl">03.</span>
-          {t.projects.title}
-        </h2>
-      </ScrollReveal>
-
-      <div className="space-y-32 px-4 max-w-6xl mx-auto">
-        {projects.map((project, index) => (
-          <ScrollReveal key={index} width="100%" variant="fade">
-            <div className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 lg:gap-20 items-center`}>
+    <section className="py-24 md:py-32 bg-[#fffdf5] overflow-hidden border-t-4 border-black relative" id="projects">
+      <div className="w-full px-4 md:px-8 relative">
+        
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+          <ScrollReveal width="100%" overflow="visible">
+            <div className="relative inline-block">
+              {/* Decorative background blob */}
+              <div className="absolute -inset-2 bg-[#ff5f57] transform -rotate-2 rounded-xl border-[3px] border-black shadow-[4px_4px_0px_0px_#000]"></div>
               
-              {/* Browser Window Card */}
-              <motion.div 
-                whileHover={{ y: -8, rotate: index % 2 === 0 ? 1 : -1 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="w-full lg:w-3/5 relative group"
-              >
-                <div className="bg-white rounded-xl border-[3px] border-black shadow-[12px_12px_0px_0px_#000] overflow-hidden">
-                  {/* Browser Header */}
-                  <div className="bg-white border-b-[3px] border-black px-4 py-3 flex items-center gap-4">
-                    <div className="flex gap-2">
-                      <div className="w-3 h-3 rounded-full bg-[#ff5f57] border border-black"></div>
-                      <div className="w-3 h-3 rounded-full bg-[#febc2e] border border-black"></div>
-                      <div className="w-3 h-3 rounded-full bg-[#28c840] border border-black"></div>
-                    </div>
-                    <div className="flex-1 bg-gray-100 border-2 border-black rounded-full px-4 py-1 text-xs font-mono text-gray-500 truncate">
-                      {project.live || project.github || 'localhost:3000'}
-                    </div>
-                  </div>
-                  
-                  {/* Image Viewport */}
-                  <div className="relative aspect-video overflow-hidden group-hover:brightness-110 transition-all">
-                    <img
-                      alt={project.title}
-                      className="w-full h-full object-cover"
-                      src={project.image}
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors pointer-events-none" />
-                  </div>
-                </div>
-                
-                {/* Decorative Elements behind */}
-                <div className={`absolute -z-10 top-10 ${index % 2 === 0 ? '-left-10' : '-right-10'} w-full h-full bg-primary border-[3px] border-black rounded-xl hidden lg:block`}></div>
-              </motion.div>
-
-              {/* Project Info */}
-              <div className="w-full lg:w-2/5 flex flex-col gap-6">
-                <div className="flex items-center gap-3">
-                  <span className="bg-secondary px-3 py-1 rounded-lg border-2 border-black font-bold text-sm shadow-[2px_2px_0px_0px_#000]">
-                    {t.projects.featured}
-                  </span>
-                </div>
-
-                <h3 className="text-3xl md:text-4xl font-black font-[family-name:var(--font-family-display)] text-black leading-none">
-                  {project.title}
-                </h3>
-
-                <div className="bg-white p-6 rounded-xl border-[3px] border-black shadow-[4px_4px_0px_0px_#000] relative">
-                  <p className="text-black font-medium leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, i) => (
-                    <span key={i} className="px-3 py-1 bg-gray-100 border-2 border-black rounded-md font-bold text-xs font-mono hover:bg-primary transition-colors cursor-default">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex gap-4 mt-2">
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-6 py-3 bg-white text-black font-bold border-[3px] border-black rounded-xl shadow-[4px_4px_0px_0px_#000] hover:shadow-[2px_2px_0px_0px_#000] hover:translate-y-[2px] transition-all"
-                    >
-                      <Github size={20} />
-                      <span>Code</span>
-                    </a>
-                  )}
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-6 py-3 bg-black text-white font-bold border-[3px] border-black rounded-xl shadow-[4px_4px_0px_0px_#888] hover:shadow-[2px_2px_0px_0px_#888] hover:translate-y-[2px] transition-all group"
-                    >
-                      <span>Live Demo</span>
-                      <ArrowUpRight size={20} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                    </a>
-                  )}
-                </div>
-              </div>
-
+              <h2 className="relative z-10 flex items-center gap-3 text-3xl md:text-5xl font-black font-family-display text-white text-stroke-3 text-shadow-cartoon px-6 py-4">
+                {t.projects.title}
+              </h2>
             </div>
           </ScrollReveal>
-        ))}
-      </div>
+        </div>
 
-      <div className="text-center mt-32">
-        <ScrollReveal width="100%" variant="fade">
-          <button
-            onClick={onShowMore}
-            className="group relative inline-flex items-center gap-3 px-10 py-5 bg-primary text-black font-black text-xl rounded-2xl border-[4px] border-black shadow-[8px_8px_0px_0px_#000] hover:shadow-[4px_4px_0px_0px_#000] hover:translate-y-[4px] transition-all"
+        {/* Navigation Buttons - Absolute Positioned */}
+        {showLeftBtn && (
+          <button 
+            onClick={() => scroll('left')}
+            className="absolute left-4 top-1/2 z-20 -translate-y-1/2 p-4 bg-white border-[3px] border-black rounded-full hover:bg-[#febc2e] transition-all shadow-[4px_4px_0px_0px_#000] active:translate-y-[-40%] active:shadow-none hidden md:flex"
+            aria-label="Scroll left"
           >
-            <span>{t.projects.viewMore}</span>
-            <div className="bg-black text-white p-1 rounded-full">
-              <ExternalLink size={20} />
-            </div>
+            <ChevronLeft size={32} strokeWidth={3} />
           </button>
-        </ScrollReveal>
+        )}
+        
+        {showRightBtn && (
+          <button 
+            onClick={() => scroll('right')}
+            className="absolute right-4 top-1/2 z-20 -translate-y-1/2 p-4 bg-white border-[3px] border-black rounded-full hover:bg-[#febc2e] transition-all shadow-[4px_4px_0px_0px_#000] active:translate-y-[-40%] active:shadow-none hidden md:flex"
+            aria-label="Scroll right"
+          >
+            <ChevronRight size={32} strokeWidth={3} />
+          </button>
+        )}
+
+        {/* Comic Strip Scroll Container */}
+        <div 
+          ref={scrollContainerRef}
+          className="flex overflow-x-auto gap-8 pb-12 snap-x snap-mandatory hide-scrollbar px-2 md:px-16"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {projects.map((project, index) => (
+            <motion.div 
+              key={index}
+              className="min-w-[85vw] md:min-w-[380px] lg:min-w-[420px] snap-center"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              {/* Comic Panel Card */}
+              <div className="bg-white border-4 border-black rounded-2xl shadow-[8px_8px_0px_0px_#000] overflow-hidden flex flex-col h-full hover:-translate-y-2 transition-transform duration-300">
+                
+                {/* Browser Top Bar */}
+                <div className="bg-black p-3 flex items-center gap-3 border-b-4 border-black">
+                  <div className="flex gap-2">
+                    <div className="w-3 h-3 rounded-full bg-[#ff5f57] border border-white/20"></div>
+                    <div className="w-3 h-3 rounded-full bg-[#febc2e] border border-white/20"></div>
+                    <div className="w-3 h-3 rounded-full bg-[#28c840] border border-white/20"></div>
+                  </div>
+                  <div className="flex-1 bg-gray-800 rounded-md px-3 py-1 text-[10px] md:text-xs font-mono text-gray-400 truncate">
+                    {project.live ? new URL(project.live).hostname : 'localhost:3000'}
+                  </div>
+                </div>
+
+                {/* Project Image Area */}
+                <div className="relative aspect-video border-b-4 border-black group overflow-hidden bg-gray-100">
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  
+                  {/* Overlay Actions */}
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 backdrop-blur-sm">
+                    {project.live && (
+                      <a 
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 bg-[#28c840] border-[3px] border-black rounded-full text-black hover:scale-110 transition-transform shadow-[4px_4px_0px_0px_#000]"
+                        title="Live Demo"
+                      >
+                        <ExternalLink size={24} strokeWidth={3} />
+                      </a>
+                    )}
+                    {project.github && (
+                      <a 
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 bg-white border-[3px] border-black rounded-full text-black hover:scale-110 transition-transform shadow-[4px_4px_0px_0px_#000]"
+                        title="View Code"
+                      >
+                        <Github size={24} strokeWidth={3} />
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                {/* Content Area */}
+                <div className="p-6 flex flex-col flex-1 bg-white relative">
+                  {/* Floating Badge */}
+                  <div className="absolute -top-5 right-6 bg-[#febc2e] px-4 py-1 border-[3px] border-black rounded-lg shadow-[4px_4px_0px_0px_#000] transform rotate-2">
+                    <span className="font-black text-xs uppercase tracking-wider">Featured</span>
+                  </div>
+
+                  <h3 className="text-2xl font-black font-family-display mb-3 leading-tight">
+                    {project.title}
+                  </h3>
+                  
+                  <p className="text-black font-medium text-sm mb-6 line-clamp-3">
+                    {project.description}
+                  </p>
+
+                  <div className="mt-auto">
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.slice(0, 4).map((tech, i) => (
+                        <span 
+                          key={i} 
+                          className="px-2 py-1 bg-gray-100 border-2 border-black rounded-md text-xs font-bold font-mono transform hover:-rotate-2 transition-transform cursor-default"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+          
+          {/* "View More" Card at the end */}
+          <div className="min-w-[200px] md:min-w-[300px] snap-center flex items-center justify-center">
+            <button
+              onClick={onShowMore}
+              className="group flex flex-col items-center gap-4 p-8 bg-[#febc2e] border-4 border-black rounded-2xl shadow-[8px_8px_0px_0px_#000] hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_#000] transition-all"
+            >
+              <div className="w-16 h-16 bg-white border-[3px] border-black rounded-full flex items-center justify-center group-hover:rotate-12 transition-transform">
+                <ArrowRight size={32} strokeWidth={3} />
+              </div>
+              <span className="font-black text-xl font-family-display text-center">
+                {t.projects.viewMore}
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Hint */}
+        <div className="md:hidden text-center mt-4 text-sm font-bold opacity-50 animate-pulse">
+          ← Swipe to explore →
+        </div>
+
       </div>
     </section>
   );

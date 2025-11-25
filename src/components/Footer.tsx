@@ -54,7 +54,7 @@ const Footer = () => {
               <Star size={32} fill="currentColor" />
             </motion.div>
 
-            <h2 className="text-4xl md:text-6xl font-black text-black mb-6 font-[family-name:var(--font-family-display)] drop-shadow-[4px_4px_0px_rgba(0,0,0,1)] stroke-black text-shadow-cartoon relative z-10">
+            <h2 className="text-4xl md:text-6xl font-black text-white mb-6 font-[family-name:var(--font-family-display)] text-stroke-3 text-shadow-cartoon relative z-10">
               {t.footer.title}
             </h2>
             <p className="text-black font-bold text-lg md:text-xl max-w-lg mx-auto mb-10">

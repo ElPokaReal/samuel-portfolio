@@ -86,13 +86,19 @@ const ProjectGallery = ({ isOpen, onClose }: ProjectGalleryProps) => {
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    className="bg-white rounded-xl border-[3px] border-black overflow-hidden hover:shadow-[6px_6px_0px_0px_#000] hover:-translate-y-1 transition-all duration-300 group flex flex-col"
+                    // Limit stagger to first 6 items to prevent massive cascade lag
+                    transition={{ 
+                      delay: index < 6 ? index * 0.05 : 0,
+                      duration: 0.3
+                    }}
+                    className="bg-white rounded-xl border-[3px] border-black overflow-hidden hover:shadow-[6px_6px_0px_0px_#000] hover:-translate-y-1 transition-all duration-300 group flex flex-col will-change-transform"
                   >
                     <div className="relative h-48 overflow-hidden border-b-[3px] border-black">
                       <img 
                         src={project.image} 
                         alt={project.title}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />

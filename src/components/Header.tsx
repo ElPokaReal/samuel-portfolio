@@ -17,10 +17,12 @@ const Header = () => {
   };
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    // Check if we are at the bottom of the page (Footer visible)
-    const isAtBottom = window.innerHeight + latest >= document.documentElement.scrollHeight - 100;
-
-    if (isAtBottom) {
+    const previous = lastScrollY.current;
+    
+    // Smart Navbar Logic:
+    // Hide on scroll down (if moved more than 10px and not at top)
+    // Show on scroll up
+    if (latest > previous && latest > 150) {
       setIsHidden(true);
     } else {
       setIsHidden(false);
@@ -32,7 +34,10 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['about', 'projects', 'contact'];
-      const scrollPosition = window.scrollY + 300;
+      // Adjusted offset for active section detection
+      // Using a smaller fixed offset (80px) to ensure we detect the section we are currently in,
+      // especially since we scroll 50px INTO the section (negative offset).
+      const scrollPosition = window.scrollY + 80;
 
       // Check if we are at the bottom of the page
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50) {
@@ -47,7 +52,13 @@ const Header = () => {
           const offsetBottom = offsetTop + element.offsetHeight;
 
           if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
-            setActiveSection(section);
+            // User request: Prioritize 'projects' (Portfolio) as the active icon.
+            // If we are in the 'about' section, we highlight 'projects' instead.
+            if (section === 'about') {
+              setActiveSection('projects');
+            } else {
+              setActiveSection(section);
+            }
             break;
           }
         }
@@ -63,8 +74,16 @@ const Header = () => {
     e.preventDefault();
     const element = document.getElementById(sectionId);
     if (element) {
-      // For contact (footer), we might want to scroll a bit further down or just to the element
-      const headerOffset = sectionId === 'contact' ? 0 : 100;
+      // Adjusted offset logic:
+      // 'about': -50px (scrolls 50px INTO the section, skipping part of the 80px+ padding)
+      // 'projects': -50px (scrolls 50px INTO the section, skipping part of the 96px+ padding)
+      // 'contact': 0px (footer)
+      let headerOffset = 100; // Default fallback
+      
+      if (sectionId === 'about') headerOffset = -50;
+      if (sectionId === 'projects') headerOffset = -50;
+      if (sectionId === 'contact') headerOffset = 0;
+
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 

@@ -30,10 +30,11 @@ function App() {
             <ScrollReveal width="100%">
               <Experience />
             </ScrollReveal>
-            <Projects onShowMore={() => setShowGallery(true)} />
-            <ProjectGallery isOpen={showGallery} onClose={() => setShowGallery(false)} />
-            </div>
+          </div>
         </div>
+        
+        <Projects onShowMore={() => setShowGallery(true)} />
+        <ProjectGallery isOpen={showGallery} onClose={() => setShowGallery(false)} />
             <ScrollReveal width="100%">
         <Footer />
       </ScrollReveal>
