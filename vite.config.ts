@@ -6,5 +6,6 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/samuel-portfolio',
+  plugins: [react(), tailwindcss()],
+  // base: '/samuel-portfolio', // Commented out for Vercel deployment
 })
