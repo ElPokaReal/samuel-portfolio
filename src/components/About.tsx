@@ -15,9 +15,11 @@ const About = () => {
             <p>{t.about.paragraph1}</p>
             <p>{t.about.paragraph2}</p>
             <img 
-              src="https://skillicons.dev/icons?i=react,js,ts,nodejs,php,flutter,express,nextjs,supabase,postgresql,mysql,sqlite,html,css,git,laravel,tailwind&theme=light&perline=6" 
+              src="/tech-stack.svg" 
               alt="Tecnologías de desarrollo web: React, Next.js, TypeScript, Node.js, Supabase, SQL y más"
               loading="lazy"
+              width="312"
+              height="160"
             />
           </div>
         </div>

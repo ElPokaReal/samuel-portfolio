@@ -32,42 +32,32 @@ const Header = () => {
   });
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['about', 'projects', 'contact'];
-      // Adjusted offset for active section detection
-      // Using a smaller fixed offset (80px) to ensure we detect the section we are currently in,
-      // especially since we scroll 50px INTO the section (negative offset).
-      const scrollPosition = window.scrollY + 80;
-
-      // Check if we are at the bottom of the page
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50) {
-        setActiveSection('contact');
-        return;
-      }
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const offsetTop = element.offsetTop;
-          const offsetBottom = offsetTop + element.offsetHeight;
-
-          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
             // User request: Prioritize 'projects' (Portfolio) as the active icon.
             // If we are in the 'about' section, we highlight 'projects' instead.
-            if (section === 'about') {
+            if (entry.target.id === 'about') {
               setActiveSection('projects');
             } else {
-              setActiveSection(section);
+              setActiveSection(entry.target.id);
             }
-            break;
           }
-        }
+        });
+      },
+      {
+        rootMargin: '-50% 0px -50% 0px' // Trigger when section is in the middle of viewport
       }
-      if (window.scrollY < 100) setActiveSection('');
-    };
+    );
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const sections = ['about', 'projects', 'contact'];
+    sections.forEach((section) => {
+      const element = document.getElementById(section);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
@@ -168,6 +158,7 @@ const Header = () => {
           <button
             onClick={toggleLanguage}
             className="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center font-black text-xs md:text-sm bg-primary border-2 border-black rounded-full hover:shadow-[2px_2px_0px_0px_#000] hover:-translate-y-0.5 transition-all"
+            aria-label={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
           >
             {language.toUpperCase()}
           </button>
@@ -176,6 +167,7 @@ const Header = () => {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden w-10 h-10 flex items-center justify-center bg-black text-white rounded-full border-2 border-black active:scale-95 transition-transform"
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           >
             {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>

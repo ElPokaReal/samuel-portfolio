@@ -164,7 +164,7 @@ const Projects = ({ onShowMore }: ProjectsProps) => {
                 {/* Content Area */}
                 <div className="p-6 flex flex-col flex-1 bg-white relative">
                   {/* Floating Badge */}
-                  <div className="absolute -top-5 right-6 bg-[#febc2e] px-4 py-1 border-[3px] border-black rounded-lg shadow-[4px_4px_0px_0px_#000] transform rotate-2">
+                  <div className="absolute -top-5 right-6 bg-[#febc2e] px-4 py-1 border-[3px] border-black rounded-lg shadow-[4px_4px_0px_0px_#000] transform rotate-2 text-black">
                     <span className="font-black text-xs uppercase tracking-wider">Featured</span>
                   </div>
 
@@ -210,7 +210,7 @@ const Projects = ({ onShowMore }: ProjectsProps) => {
         </div>
 
         {/* Mobile Hint */}
-        <div className="md:hidden text-center mt-4 text-sm font-bold opacity-50 animate-pulse">
+        <div className="md:hidden text-center mt-4 text-sm font-bold text-slate-gray animate-pulse">
           ← Swipe to explore →
         </div>
 
