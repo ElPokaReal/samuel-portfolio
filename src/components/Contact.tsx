@@ -6,10 +6,10 @@ const Contact = () => {
   return (
     <section className="py-20 md:py-32 pb-40 md:pb-48 text-center" id="contact">
       <div className="px-4">
-        <h2 className="text-primary font-[family-name:var(--font-family-display)] text-xl font-bold text-shadow-cartoon drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+        <h2 className="text-primary font-family-display text-xl font-bold text-shadow-cartoon drop-shadow-[2px_2px_0px_rgba(0,0,0,1)]">
           {t.contact.subtitle}
         </h2>
-        <h3 className="font-[family-name:var(--font-family-display)] text-4xl md:text-5xl font-bold text-text-light dark:text-text-dark mt-4 mb-6">
+        <h3 className="font-family-display text-4xl md:text-5xl font-bold text-text-light dark:text-text-dark mt-4 mb-6">
           {t.contact.title}
         </h3>
         <p className="text-slate-gray max-w-xl mx-auto mb-10">

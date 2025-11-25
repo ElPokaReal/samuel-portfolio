@@ -51,7 +51,7 @@ const OtherProjects = ({ onHide }: OtherProjectsProps) => {
           </motion.div>
 
           <div className="space-y-4 z-10">
-            <h3 className="text-3xl md:text-4xl font-black text-black font-[family-name:var(--font-family-display)] drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] stroke-black text-shadow-cartoon">
+            <h3 className="text-3xl md:text-4xl font-black text-black font-family-display drop-shadow-[2px_2px_0px_rgba(0,0,0,1)] stroke-black text-shadow-cartoon">
               {t.otherProjects.title}
             </h3>
             

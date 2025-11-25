@@ -88,7 +88,7 @@ export const translations: Record<Language, Translations> = {
   es: {
     meta: {
       title: 'Samuel Aranguren | Desarrollador Full Stack Next.js & React',
-      description: 'Portafolio de Samuel Aranguren - Desarrollador Web Full Stack especializado en Next.js, React, TypeScript y automatización de procesos. Creando experiencias digitales de alto rendimiento.',
+      description: 'Portafolio de Samuel Aranguren - Desarrollador Web Full Stack especializado en Next.js, React, TypeScript y automatización de procesos. Creando experiencias de alto rendimiento.',
     },
     header: {
       about: 'Sobre mí',

@@ -7,7 +7,7 @@ const About = () => {
     <section className="py-20 md:py-24" id="about">
       <div className="flex flex-col md:flex-row items-start gap-10 px-4">
         <div className="w-full md:w-1/2">
-          <h2 className="flex items-center gap-4 text-3xl md:text-4xl font-black leading-tight tracking-[-0.015em] font-[family-name:var(--font-family-display)] text-black mb-16 px-4">
+          <h2 className="flex items-center gap-4 text-3xl md:text-4xl font-black leading-tight tracking-[-0.015em] font-family-display text-black mb-16 px-4">
             <span className="bg-primary px-2 cartoon-border cartoon-shadow transform -rotate-2">01.</span>
             {t.about.title}
           </h2>

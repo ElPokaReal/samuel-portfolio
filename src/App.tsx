@@ -10,8 +10,8 @@ import Footer from './components/Footer';
 import { useSEO } from './hooks/useSEO';
 import { ScrollReveal } from './components/ScrollReveal';
 
-const lazyRetry = (componentImport: () => Promise<{ default: React.ComponentType<any> }>) => {
-  return new Promise<{ default: React.ComponentType<any> }>((resolve, reject) => {
+const lazyRetry = <T,>(componentImport: () => Promise<{ default: T }>) => {
+  return new Promise<{ default: T }>((resolve, reject) => {
     componentImport()
       .then((component) => {
         resolve(component);

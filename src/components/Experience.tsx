@@ -7,9 +7,9 @@ const Experience = () => {
   return (
     <section className="py-20 md:py-24" id="experience">
       <div className="px-4">
-        <h2 className="flex items-center gap-4 text-3xl md:text-4xl font-black leading-tight tracking-[-0.015em] font-[family-name:var(--font-family-display)] text-black mb-16 px-4">
+        <h2 className="flex items-center gap-4 text-3xl md:text-4xl font-black leading-tight tracking-[-0.015em] font-family-display text-black mb-16 px-4">
           <span className="bg-primary px-2 cartoon-border cartoon-shadow transform -rotate-2">02.</span>
-          {t.experience.title}
+          {t.experience.title}  
         </h2>
 
         <div className="max-w-3xl space-y-8">
@@ -25,7 +25,7 @@ const Experience = () => {
               <div className="space-y-3">
                 {/* Company and Position */}
                 <div>
-                  <h3 className="text-xl font-bold text-text-light dark:text-text-dark font-[family-name:var(--font-family-display)]">
+                  <h3 className="text-xl font-bold text-text-light dark:text-text-dark font-family-display">
                     {item.position}
                   </h3>
                   <div className="flex items-center gap-2 text-black font-bold mt-1">
