@@ -164,7 +164,7 @@ const ProjectGallery = ({ isOpen, onClose }: ProjectGalleryProps) => {
                           <a 
                             href={content.github}
                             target="_blank"
-                            rel="noopener noreferrer"
+                            rel="noopener noreferrer nofollow"
                             className="flex-1 flex items-center justify-center gap-2 py-2 bg-white border-2 border-black rounded-lg font-bold text-sm hover:bg-black hover:text-white transition-colors"
                           >
                             <Github size={16} />
@@ -175,7 +175,7 @@ const ProjectGallery = ({ isOpen, onClose }: ProjectGalleryProps) => {
                           <a 
                             href={content.live}
                             target="_blank"
-                            rel="noopener noreferrer"
+                            rel="noopener noreferrer nofollow"
                             className="flex-1 flex items-center justify-center gap-2 py-2 bg-primary border-2 border-black rounded-lg font-bold text-sm hover:bg-white transition-colors"
                           >
                             <ExternalLink size={16} />

@@ -89,7 +89,7 @@ const Footer = () => {
             <a
               href="https://github.com/ElPokaReal/"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               className="w-16 h-16 flex items-center justify-center bg-white border-[3px] border-black rounded-2xl shadow-[4px_4px_0px_0px_#000] hover:shadow-[2px_2px_0px_0px_#000] hover:translate-y-[2px] hover:bg-black hover:text-white transition-all duration-200 group"
               aria-label="GitHub"
             >
@@ -98,7 +98,7 @@ const Footer = () => {
             <a
               href="https://www.linkedin.com/in/samuel-aranguren-4447b31b4"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer nofollow"
               className="w-16 h-16 flex items-center justify-center bg-white border-[3px] border-black rounded-2xl shadow-[4px_4px_0px_0px_#000] hover:shadow-[2px_2px_0px_0px_#000] hover:translate-y-[2px] hover:bg-[#0077b5] hover:text-white transition-all duration-200 group"
               aria-label="LinkedIn"
             >

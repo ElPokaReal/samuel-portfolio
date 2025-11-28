@@ -34,6 +34,13 @@ const Projects = ({ onShowMore }: ProjectsProps) => {
     fetchProjects();
   }, []);
 
+  // Reset scroll position when projects load
+  useEffect(() => {
+    if (!loading && scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft = 0;
+    }
+  }, [loading]);
+
   // Helper to get localized content
   const getProjectContent = (project: Project) => ({
     title: language === 'es' ? project.title_es : project.title_en,
@@ -180,7 +187,7 @@ const Projects = ({ onShowMore }: ProjectsProps) => {
                       <a 
                         href={content.live}
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="noopener noreferrer nofollow"
                         className="p-3 bg-[#28c840] border-[3px] border-black rounded-full text-black hover:scale-110 transition-transform shadow-[4px_4px_0px_0px_#000]"
                         title="Live Demo"
                       >
@@ -191,7 +198,7 @@ const Projects = ({ onShowMore }: ProjectsProps) => {
                       <a 
                         href={content.github}
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="noopener noreferrer nofollow"
                         className="p-3 bg-white border-[3px] border-black rounded-full text-black hover:scale-110 transition-transform shadow-[4px_4px_0px_0px_#000]"
                         title="View Code"
                       >

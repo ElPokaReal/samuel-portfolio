@@ -147,7 +147,7 @@ const Header = () => {
           <a
             href={t.header.cvUrl}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="noopener noreferrer nofollow"
             className="hidden md:flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-white text-black border-2 border-black rounded-full hover:bg-black hover:text-white transition-all hover:shadow-[2px_2px_0px_0px_#000] hover:-translate-y-0.5"
             title={t.header.cv}
           >
@@ -218,17 +218,17 @@ const Header = () => {
                 <a
                   href={t.header.cvUrl}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer nofollow"
                   className="flex-1 flex items-center justify-center gap-2 py-3 font-bold bg-black text-white border-2 border-black rounded-xl hover:bg-gray-900 transition-all"
                 >
                   <FileText size={18} />
                   CV
                 </a>
                 <div className="flex gap-2">
-                   <a href="https://github.com/ElPokaReal/" target="_blank" rel="noopener noreferrer" className="w-12 flex items-center justify-center border-2 border-black rounded-xl hover:bg-primary transition-colors">
+                   <a href="https://github.com/ElPokaReal/" target="_blank" rel="noopener noreferrer nofollow" className="w-12 flex items-center justify-center border-2 border-black rounded-xl hover:bg-primary transition-colors">
                     <Github size={20} />
                   </a>
-                  <a href="https://www.linkedin.com/in/samuel-aranguren-4447b31b4" target="_blank" rel="noopener noreferrer" className="w-12 flex items-center justify-center border-2 border-black rounded-xl hover:bg-primary transition-colors">
+                  <a href="https://www.linkedin.com/in/samuel-aranguren-4447b31b4" target="_blank" rel="noopener noreferrer nofollow" className="w-12 flex items-center justify-center border-2 border-black rounded-xl hover:bg-primary transition-colors">
                     <Linkedin size={20} />
                   </a>
                 </div>
